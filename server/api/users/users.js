@@ -40,6 +40,7 @@ export function createUser(req, res) {
   res.send(user);
 }
 
+//Edit user information if it exists, otherwise create new user with specified id
 export function updateUser(req, res) {
   var id = req.params.id;
   var bool = false;
@@ -71,6 +72,7 @@ export function updateUser(req, res) {
   }
 }
 
+//Remove user from local memory if exists
 export function removeUser(req, res) {
   var id = req.params.id;
   var bool = false;
