@@ -58,7 +58,7 @@ export function updateUser(req, res) {
     found.address = req.body.address;
     found.age = req.body.age;
     res.status(200);
-    res.send(user);
+    res.send(found);
   } else {
     var user = {
       id: id,
