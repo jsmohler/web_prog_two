@@ -34,7 +34,6 @@ export function createUser(req, res) {
     address: req.body.address,
     age: req.body.age
   };
-
   users.push(user);
   res.status(201);
   res.send(user);
@@ -59,6 +58,7 @@ export function updateUser(req, res) {
     found.address = req.body.address;
     found.age = req.body.age;
     res.send(user);
+
   } else {
     var user = {
       id: id,
@@ -66,6 +66,7 @@ export function updateUser(req, res) {
       address: req.body.address,
       age: req.body.age
     };
+    
     users.push(user);
     res.status(201);
     res.send(user);
