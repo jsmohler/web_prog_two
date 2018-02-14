@@ -4,13 +4,44 @@ import routing from './main.routes';
 
 export class MainController {
   /*@ngInject*/
-  constructor($http) {
+  constructor($http, User) {
     this.$http = $http;
-    this.values = ['first', 'second', 'third'];
+    this.User = User;
+    this.setData();
+    this.getUserData();
   }
 
-  $onInit() {
+  setData() {
+    this.values = ['first', 'second', 'third'];
+    this.valueToSquare = 4;
   }
+
+  getUserData() {
+    this.User.getAllUsers()
+      .then(response => {
+        this.users = response.data;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+}
+
+export function UserService($http) {
+  'ngInject';
+  var User = {
+    getAllUsers() {
+      return $http.get('/api/users/');
+    }
+  }
+  return User;
+}
+
+export function SquareFilter() {
+  var squareFunction = function(value) {
+    return value * value;
+  }
+  return squareFunction;
 }
 
 export default angular.module('comp3705App.main', [ngRoute])
@@ -20,4 +51,6 @@ export default angular.module('comp3705App.main', [ngRoute])
     controller: MainController,
     controllerAs: 'mainController'
   })
+  .service('User', UserService)
+  .filter('Square', SquareFilter)
   .name;
