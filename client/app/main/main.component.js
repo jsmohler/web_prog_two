@@ -32,6 +32,10 @@ export function UserService($http) {
   var User = {
     getAllUsers() {
       return $http.get('/api/users/');
+    },
+
+    getUserById(userId) {
+      return $http.get('/api/users/' + userId);
     }
   }
   return User;
