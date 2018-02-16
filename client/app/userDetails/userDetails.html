@@ -19,17 +19,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="user in userDetailsController.users">
-          <td>{{user._id}}</td>
-          <td>{{user.age}}</td>
-          <td>{{user.name.firstName}}</td>
-          <td>{{user.name.middleName}}</td>
-          <td>{{user.name.lastName}}</td>
-          <td>{{user.address.addressLine1}}</td>
-          <td>{{user.address.addressLine2}}</td>
-          <td>{{user.address.city}}</td>
-          <td>{{user.address.state}}</td>
-          <td>{{user.address.zip}}</td>
+        <tr>
+          <td>{{userDetailsController.users._id}}</td>
+          <td>{{userDetailsController.users.age}}</td>
+          <td>{{userDetailsController.users.name.firstName}}</td>
+          <td>{{userDetailsController.users.name.middleName}}</td>
+          <td>{{userDetailsController.users.name.lastName}}</td>
+          <td>{{userDetailsController.users.address.addressLine1}}</td>
+          <td>{{userDetailsController.users.address.addressLine2}}</td>
+          <td>{{userDetailsController.users.address.city}}</td>
+          <td>{{userDetailsController.users.address.state}}</td>
+          <td>{{userDetailsController.users.address.zip}}</td>
         </tr>
         </tbody>
       </table>
