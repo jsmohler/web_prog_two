@@ -8,26 +8,19 @@ export function read(req, res) {
   let recipe = Recipe.findById(req.params.recipeId);
   let reviewIds = recipe.reviews;
 
-  for (var i = 0; i < reviewIds.size(); i++)
-  {
-    Review.findById(reviewIds[i])
-      .exec()
-      .then(function(existingReview) {
-        if(existingReview) {
-          // Review was found by Id
-          res.status(200);
-          res.json(existingReview);
-        } else {
-          // User was not found
-          res.status(404);
-          res.json({message: 'Not Found'});
-        }
-      })
-      .catch(function(err) {
-        res.status(400);
-        res.send(err);
-      });
-  }}
+  Review.find(
+    {'_id': {$in: reviewIds}}
+  )
+    .exec()
+    .then(function(reviews) {
+      res.json(reviews);
+    })
+    .catch(function(err) {
+      res.status(500);
+      res.send(err);
+    });
+
+}
 
 // Find details for one review
 export function readOne(req, res) {
@@ -49,94 +42,88 @@ export function readOne(req, res) {
       res.send(err);
     });
 }
-//
-// // Create a new user
-// export function create(req, res) {
-//   let address = req.body.address;
-//   let user = req.body;
-//   // Start off by saving the address
-//   Address.create(address)
-//     .then(function(createdAddress) {
-//       user.address = createdAddress;
-//       return User.create(user);
-//     })
-//     .then(function(createdUser) {
-//       res.status(201);
-//       res.json(createdUser);
-//     })
-//     .catch(function(err) {
-//       res.status(400);
-//       res.send(err);
-//     });
-// }
-//
-// // Update a user
-// export function update(req, res) {
-//   var updatedUser;
-//   User.findById(req.params.id)
-//     .populate('address')
-//     .exec()
-//     .then(function(existingUser) {
-//       if(existingUser) {
-//         existingUser.address.addressLine1 = req.body.address.addressLine1;
-//         existingUser.address.addressLine2 = req.body.address.addressLine2;
-//         existingUser.address.city = req.body.address.city;
-//         existingUser.address.state = req.body.address.state;
-//         existingUser.address.zip = req.body.address.zip;
-//         existingUser.age = req.body.age;
-//         existingUser.name.firstName = req.body.name.firstName;
-//         existingUser.name.middleName = req.body.name.middleName;
-//         existingUser.name.lastName = req.body.name.lastName;
-//         updatedUser = existingUser;
-//         return Promise.all([
-//           existingUser.address.increment().save(),
-//           existingUser.increment().save()
-//         ]);
-//       } else {
-//         return null;
-//       }
-//     })
-//     .then(function(savedObjects) {
-//       if(savedObjects) {
-//         res.status(200);
-//         res.json(updatedUser);
-//       } else {
-//         res.status(404);
-//         res.json({message: 'Not Found'});
-//       }
-//     })
-//     .catch(function(err) {
-//       res.status(400);
-//       res.send(err);
-//     });
-// }
-//
-// // Remove a user
-// export function destroy(req, res) {
-//   User.findById(req.params.id)
-//     .populate('address')
-//     .exec()
-//     .then(function(existingUser) {
-//       if(existingUser) {
-//         return Promise.all([
-//           existingUser.address.remove(),
-//           existingUser.remove()
-//         ]);
-//       } else {
-//         return null;
-//       }
-//     })
-//     .then(function(deletedUser) {
-//       if(deletedUser) {
-//         res.status(204).send();
-//       } else {
-//         res.status(404);
-//         res.json({message: 'Not Found'});
-//       }
-//     })
-//     .catch(function(err) {
-//       res.status(400);
-//       res.send(err);
-//     });
-// }
+
+// Create a new review
+export function create(req, res) {
+  let review = req.body;
+  let newId;
+
+  // Start off by saving the address
+  Review.create(review)
+    .then(function(createdReview) {
+      newId = createdReview._id;
+      res.status(201);
+      res.json(createdReview);
+      return Recipe.findById(req.params.recipeId);
+    }).then(function(recipe) {
+      //Update recipe with review
+    })
+    .catch(function(err) {
+      res.status(400);
+      res.send(err);
+    });
+}
+
+// Update a review
+export function update(req, res) {
+  var updatedReview;
+  Review.findById(req.params.reviewId)
+    .exec()
+    .then(function(existingReview) {
+      if(existingReview) {
+        existingReview.description = req.body.description;
+        existingReview.rating = req.body.rating;
+        existingReview.user = req.body.user;
+        updatedReview = existingReview;
+        return Promise.all([
+          existingReview.increment().save()
+        ]);
+      } else {
+        return null;
+      }
+    })
+    .then(function(savedObjects) {
+      if(savedObjects) {
+        res.status(200);
+        res.json(updatedReview);
+      } else {
+        res.status(404);
+        res.json({message: 'Not Found'});
+      }
+    })
+    .catch(function(err) {
+      res.status(400);
+      res.send(err);
+    });
+}
+
+// Remove a user
+export function destroy(req, res) {
+  let recipe = ecipe.findById(req.params.recipeId);
+
+  Review.findById(req.params.reviewId)
+    .exec()
+    .then(function(existingReview) {
+      if(existingReview) {
+        return Promise.all([
+          existingReview.remove()
+        ]);
+      } else {
+        return null;
+      }
+    })
+    .then(function(deletedUser) {
+      if(deletedUser) {
+        //Remove id from recippe reviews array
+        res.status(204).send();
+      } else {
+        res.status(404);
+        res.json({message: 'Not Found'});
+      }
+    })
+    .catch(function(err) {
+      res.status(400);
+      res.send(err);
+    });
+}
 
