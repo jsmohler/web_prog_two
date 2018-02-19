@@ -56,9 +56,8 @@ export function create(req, res) {
       res.json(createdReview);
       return Recipe.findById(req.params.recipeId);
     }).then(function(recipe) {
-      //Update recipe with review
-    })
-    .catch(function(err) {
+
+    }).catch(function(err) {
       res.status(400);
       res.send(err);
     });
@@ -112,9 +111,9 @@ export function destroy(req, res) {
         return null;
       }
     })
-    .then(function(deletedUser) {
-      if(deletedUser) {
-        //Remove id from recippe reviews array
+    .then(function(deletedReview) {
+      if(deletedReview) {
+        //Remove id from recipe reviews array
         res.status(204).send();
       } else {
         res.status(404);

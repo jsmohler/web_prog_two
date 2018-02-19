@@ -6,7 +6,7 @@ let Schema = mongoose.Schema;
   that will be used
  */
 
-// This schema represents the ingredients needed fofr the recipe
+// This schema represents the ingredients needed for the recipe
 let ingredientsSchema = Schema({
   ingredients: {type: [String], required:true}
 });
@@ -20,7 +20,7 @@ let recipeSchema = Schema({
   cookingTime: {type:Number, required:true},
   directions: {type:[String], required:true},
   ingredients: ingredientsSchema,
-  reviews: {type:[Schema.Types.ObjectId], ref:'Review', required: false}
+  reviews: {type: [{ type: Schema.Types.ObjectId, ref: 'Review' }], required:false}
 });
 
 let Recipe = mongoose.model('Recipe', recipeSchema);
