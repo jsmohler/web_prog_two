@@ -1,5 +1,5 @@
 import express from 'express';
-import * as controller from './users.controller';
+import * as controller from './recipes.controller';
 
 let router = express.Router();
 

@@ -1,30 +1,43 @@
 'use strict';
 
-import {OtherUser} from './users.model';
+import {Review} from './reviews.model';
+import {Recipe} from '../recipes/recipes.model'
 
-// Find all Users
+// Find all Reviews for the recipe
 export function read(req, res) {
-  OtherUser.find()
-    .exec()
-    // This then method will only be called if the query was successful, so no need to error check!
-    .then(function(users) {
-      res.json(users);
-    })
-    .catch(function(err) {
-      res.status(500);
-      res.send(err);
-    });
-}
+  let recipe = Recipe.findById(req.params.recipeId);
+  let reviewIds = recipe.reviews;
 
-// Find details for one user
+  for (var i = 0; i < reviewIds.size(); i++)
+  {
+    Review.findById(reviewIds[i])
+      .exec()
+      .then(function(existingReview) {
+        if(existingReview) {
+          // Review was found by Id
+          res.status(200);
+          res.json(existingReview);
+        } else {
+          // User was not found
+          res.status(404);
+          res.json({message: 'Not Found'});
+        }
+      })
+      .catch(function(err) {
+        res.status(400);
+        res.send(err);
+      });
+  }}
+
+// Find details for one review
 export function readOne(req, res) {
-  OtherUser.findById(req.params.id)
+  Review.findById(req.params.reviewId)
     .exec()
-    .then(function(existingUser) {
-      if(existingUser) {
+    .then(function(existingReview) {
+      if(existingReview) {
         // User was found by Id
         res.status(200);
-        res.json(existingUser);
+        res.json(existingReview);
       } else {
         // User was not found
         res.status(404);
@@ -36,18 +49,21 @@ export function readOne(req, res) {
       res.send(err);
     });
 }
-
+//
 // // Create a new user
 // export function create(req, res) {
+//   let address = req.body.address;
 //   let user = req.body;
 //   // Start off by saving the address
-//   OtherUser.create(user)
-//     // User and Address saved successfully! return 201 with the created user object
+//   Address.create(address)
+//     .then(function(createdAddress) {
+//       user.address = createdAddress;
+//       return User.create(user);
+//     })
 //     .then(function(createdUser) {
 //       res.status(201);
 //       res.json(createdUser);
 //     })
-//     // An error was encountered during either the save of the address or the save of the user
 //     .catch(function(err) {
 //       res.status(400);
 //       res.send(err);
@@ -57,26 +73,26 @@ export function readOne(req, res) {
 // // Update a user
 // export function update(req, res) {
 //   var updatedUser;
-//
-//   OtherUser.findById(req.params.id)
+//   User.findById(req.params.id)
+//     .populate('address')
 //     .exec()
-//     // Update user
 //     .then(function(existingUser) {
-//       // If user exists, update all fields of the object
 //       if(existingUser) {
+//         existingUser.address.addressLine1 = req.body.address.addressLine1;
+//         existingUser.address.addressLine2 = req.body.address.addressLine2;
+//         existingUser.address.city = req.body.address.city;
+//         existingUser.address.state = req.body.address.state;
+//         existingUser.address.zip = req.body.address.zip;
+//         existingUser.age = req.body.age;
 //         existingUser.name.firstName = req.body.name.firstName;
 //         existingUser.name.middleName = req.body.name.middleName;
 //         existingUser.name.lastName = req.body.name.lastName;
-//         existingUser.email = req.body.email;
-//         existingUser.username = req.body.username;
-//
 //         updatedUser = existingUser;
-//
 //         return Promise.all([
+//           existingUser.address.increment().save(),
 //           existingUser.increment().save()
 //         ]);
 //       } else {
-//         // User was not found
 //         return null;
 //       }
 //     })
@@ -85,12 +101,10 @@ export function readOne(req, res) {
 //         res.status(200);
 //         res.json(updatedUser);
 //       } else {
-//         // User was not found
 //         res.status(404);
 //         res.json({message: 'Not Found'});
 //       }
 //     })
-//     // Error encountered during the save of the user
 //     .catch(function(err) {
 //       res.status(400);
 //       res.send(err);
@@ -99,28 +113,27 @@ export function readOne(req, res) {
 //
 // // Remove a user
 // export function destroy(req, res) {
-//   OtherUser.findById(req.params.id)
+//   User.findById(req.params.id)
+//     .populate('address')
 //     .exec()
 //     .then(function(existingUser) {
 //       if(existingUser) {
 //         return Promise.all([
+//           existingUser.address.remove(),
 //           existingUser.remove()
 //         ]);
 //       } else {
 //         return null;
 //       }
 //     })
-//     // Delete was successful
 //     .then(function(deletedUser) {
 //       if(deletedUser) {
 //         res.status(204).send();
 //       } else {
-//         // User was not found
 //         res.status(404);
 //         res.json({message: 'Not Found'});
 //       }
 //     })
-//     // User delete failed
 //     .catch(function(err) {
 //       res.status(400);
 //       res.send(err);

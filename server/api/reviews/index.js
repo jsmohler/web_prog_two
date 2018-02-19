@@ -1,11 +1,11 @@
 import express from 'express';
-import * as controller from './users.controller';
+import * as controller from './reviews.controller';
 
 let router = express.Router();
 
 // GET methods
-router.get('/', controller.read);
-router.get('/:id', controller.readOne);
+router.get('/recipes/:recipeId/', controller.read);
+router.get('/recipes/:recipeId/reviews/:reviewId', controller.readOne);
 
 // // POST method
 // router.post('/', controller.create);
