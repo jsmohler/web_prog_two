@@ -11,7 +11,8 @@ export function read(req, res) {
     })
     .catch(function(err) {
       res.status(500);
-      res.send(err);
+      console.error(err);
+      res.send(err.toString());
     });
 }
 
@@ -32,7 +33,8 @@ export function readOne(req, res) {
     })
     .catch(function(err) {
       res.status(400);
-      res.send(err);
+      console.error(err);
+      res.send(err.toString());
     });
 }
 
@@ -48,7 +50,8 @@ export function create(req, res) {
     // An error was encountered during either the save of the address or the save of the user
     .catch(function(err) {
       res.status(400);
-      res.send(err);
+      console.error(err);
+      res.send(err.toString());
     });
 }
 
@@ -97,7 +100,8 @@ export function update(req, res) {
     // Error encountered during the save of the user or address
     .catch(function(err) {
       res.status(400);
-      res.send(err);
+      console.error(err);
+      res.send(err.toString());
     });
 }
 
@@ -128,7 +132,8 @@ export function destroy(req, res) {
     // Recipe delete failed
     .catch(function(err) {
       res.status(400);
-      res.send(err);
+      console.error(err);
+      res.send(err.toString());
     });
 }
 

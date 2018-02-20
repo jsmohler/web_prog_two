@@ -11,7 +11,7 @@ let reviewSchema = Schema({
   description: {type:String, required:true},
   rating: {type:Number, required:true},
   dateCreated: {type:Date, default: Date.now()},
-  user: {type:Schema.Types.ObjectId, ref:'User'}
+  user: {type:Schema.Types.ObjectId, ref:'User', required:true}
 });
 
 

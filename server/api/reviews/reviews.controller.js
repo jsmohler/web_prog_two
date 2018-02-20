@@ -23,7 +23,8 @@ export function read(req, res) {
     })
     .catch(function(err) {
       res.status(500);
-      res.send(err);
+      console.error(err);
+      res.send(err.toString());
     });
 }
 
@@ -33,18 +34,19 @@ export function readOne(req, res) {
     .exec()
     .then(function(existingReview) {
       if(existingReview) {
-        // User was found by Id
+        // Review was found by Id
         res.status(200);
         res.json(existingReview);
       } else {
-        // User was not found
+        // Review was not found
         res.status(404);
         res.json({message: 'Not Found'});
       }
     })
     .catch(function(err) {
       res.status(400);
-      res.send(err);
+      console.error(err);
+      res.send(err.toString());
     });
 }
 
@@ -109,7 +111,8 @@ export function update(req, res) {
     })
     .catch(function(err) {
       res.status(400);
-      res.send(err);
+      console.error(err);
+      res.send(err.toString());
     });
 }
 
@@ -158,7 +161,8 @@ export function destroy(req, res) {
     // Review delete failed
     .catch(function(err) {
       res.status(400);
-      res.send(err);
+      console.error(err);
+      res.send(err.toString());
     });
 }
 
