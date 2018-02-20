@@ -7,6 +7,7 @@ import {Recipe} from '../recipes/recipes.model';
 export function read(req, res) {
   let reviewIds;
   Recipe.findById(req.params.recipeId)
+    .exec()
     .then(function(recipe) {
       reviewIds = recipe.reviews;
       Review.find(
