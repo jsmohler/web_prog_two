@@ -42,14 +42,13 @@ export function readOne(req, res) {
 // Create a new user
 export function create(req, res) {
   let user = req.body;
-  // Start off by saving the address
   OtherUser.create(user)
-    // User and Address saved successfully! return 201 with the created user object
+    // User saved successfully! return 201 with the created user object
     .then(function(createdUser) {
       res.status(201);
       res.json(createdUser);
     })
-    // An error was encountered during either the save of the address or the save of the user
+    // An error was encountered during the save of the user
     .catch(function(err) {
       res.status(400);
       console.error(err);

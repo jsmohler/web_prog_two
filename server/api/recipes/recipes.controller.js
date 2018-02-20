@@ -42,12 +42,12 @@ export function readOne(req, res) {
 export function create(req, res) {
   let recipe = req.body;
   Recipe.create(recipe)
-    // Recipe saved successfully! return 201 with the created user object
+    // Recipe saved successfully! return 201 with the created recipe object
     .then(function(createdRecipe) {
       res.status(201);
       res.json(createdRecipe);
     })
-    // An error was encountered during either the save of the address or the save of the user
+    // An error was encountered during the save of the recipe
     .catch(function(err) {
       res.status(400);
       console.error(err);
@@ -92,12 +92,12 @@ export function update(req, res) {
         res.status(200);
         res.json(updatedRecipe);
       } else {
-        // User was not found
+        // Recipe was not found
         res.status(404);
         res.json({message: 'Not Found'});
       }
     })
-    // Error encountered during the save of the user or address
+    // Error encountered during the save of the recipe
     .catch(function(err) {
       res.status(400);
       console.error(err);
@@ -121,7 +121,6 @@ export function destroy(req, res) {
     // Delete was successful
     .then(function(deletedRecipe) {
       if(deletedRecipe) {
-        //delete all reviews for this recipe
         res.status(204).send();
       } else {
         // Recipe was not found
