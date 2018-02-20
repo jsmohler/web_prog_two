@@ -64,7 +64,7 @@ export function update(req, res) {
       // If recipe exists, update all fields of the object
       if(existingRecipe) {
         existingRecipe.name = req.body.name;
-        existingRecipe.desciption = req.body.desciption;
+        existingRecipe.description = req.body.description;
         existingRecipe.picture = req.body.picture;
         existingRecipe.prepTime = req.body.prepTime;
         existingRecipe.cookingTime = req.body.cookingTime;
@@ -117,6 +117,7 @@ export function destroy(req, res) {
     // Delete was successful
     .then(function(deletedRecipe) {
       if(deletedRecipe) {
+        //delete all reviews for this recipe
         res.status(204).send();
       } else {
         // Recipe was not found

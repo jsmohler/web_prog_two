@@ -20,8 +20,8 @@ let recipeSchema = Schema({
   cookingTime: {type:Number, required:true},
   directions: {type:[String], required:true},
   ingredients: ingredientsSchema,
-  reviews: {type: [{ type: Schema.Types.ObjectId, ref: 'Review' }], required:false}
-});
+  reviews: {type: [Schema.Types.ObjectId], ref: 'Review', required:false}
+}, {usePushEach: true});
 
 let Recipe = mongoose.model('Recipe', recipeSchema);
 

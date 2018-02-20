@@ -1,25 +1,31 @@
 'use strict';
 
 import {Review} from './reviews.model';
+import {User} from '../users/users.model'
 import {Recipe} from '../recipes/recipes.model'
 
 // Find all Reviews for the recipe
 export function read(req, res) {
-  let recipe = Recipe.findById(req.params.recipeId);
-  let reviewIds = recipe.reviews;
-
-  Review.find(
-    {'_id': {$in: reviewIds}}
-  )
-    .exec()
-    .then(function(reviews) {
-      res.json(reviews);
+  let reviewIds;
+  Recipe.findById(req.params.recipeId)
+    .then(function(recipe) {
+      reviewIds = recipe.reviews;
+      Review.find(
+        {'_id': {$in: reviewIds}}
+      )
+        .exec()
+        .then(function(review) {
+          res.json(review);
+        })
+        .catch(function(err) {
+          res.status(500);
+          res.send(err);
+        });
     })
     .catch(function(err) {
       res.status(500);
       res.send(err);
     });
-
 }
 
 // Find details for one review
@@ -46,20 +52,32 @@ export function readOne(req, res) {
 // Create a new review
 export function create(req, res) {
   let review = req.body;
-  let newId;
+  let foundRecipe;
+  let newReview;
 
-  // Start off by saving the address
-  Review.create(review)
+  Recipe.findById(req.params.recipeId)
+    .exec()
+    .then(function(existingRecipe) {
+      if (existingRecipe) {
+        foundRecipe = existingRecipe;
+        return Review.create(review);
+      } else {
+        return Promise.reject("Recipe Not Found");
+      }
+    })
     .then(function(createdReview) {
-      newId = createdReview._id;
+      foundRecipe.reviews.push(createdReview);
+      newReview = createdReview;
+      return foundRecipe.increment().save();
+    })
+    .then(function() {
       res.status(201);
-      res.json(createdReview);
-      return Recipe.findById(req.params.recipeId);
-    }).then(function(recipe) {
-
-    }).catch(function(err) {
+      res.json(newReview);
+    })
+    .catch(function(err) {
       res.status(400);
-      res.send(err);
+      console.error(err);
+      res.send(err.toString());
     });
 }
 
@@ -98,12 +116,22 @@ export function update(req, res) {
 
 // Remove a user
 export function destroy(req, res) {
-  let recipe = ecipe.findById(req.params.recipeId);
+  let foundRecipe;
+  let foundReview;
 
-  Review.findById(req.params.reviewId)
+  Recipe.findById(req.params.recipeId)
     .exec()
+    .then(function(existingRecipe) {
+      if (existingRecipe) {
+        foundRecipe = existingRecipe;
+        return Review.findById(req.params.reviewId);
+      } else {
+        return Promise.reject("Recipe not found");
+      }
+    })
     .then(function(existingReview) {
-      if(existingReview) {
+      if (existingReview) {
+        foundReview = existingReview;
         return Promise.all([
           existingReview.remove()
         ]);
@@ -112,17 +140,21 @@ export function destroy(req, res) {
       }
     })
     .then(function(deletedReview) {
-      if(deletedReview) {
-        //Remove id from recipe reviews array
+      if (deletedReview) {
+        let index = foundRecipe.reviews.indexOf(foundReview);
+        foundRecipe.reviews.splice(index, 1);
         res.status(204).send();
       } else {
+        // Review was not found
         res.status(404);
         res.json({message: 'Not Found'});
       }
     })
+    // Review delete failed
     .catch(function(err) {
       res.status(400);
       res.send(err);
     });
+
 }
 
