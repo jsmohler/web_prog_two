@@ -1,8 +1,7 @@
 'use strict';
 
 import {Review} from './reviews.model';
-import {User} from '../users/users.model'
-import {Recipe} from '../recipes/recipes.model'
+import {Recipe} from '../recipes/recipes.model';
 
 // Find all Reviews for the recipe
 export function read(req, res) {
@@ -143,11 +142,17 @@ export function destroy(req, res) {
       if (deletedReview) {
         let index = foundRecipe.reviews.indexOf(foundReview);
         foundRecipe.reviews.splice(index, 1);
-        res.status(204).send();
+        return foundRecipe.increment().save();
       } else {
         // Review was not found
         res.status(404);
         res.json({message: 'Not Found'});
+        return null;
+      }
+    })
+    .then(function(updatedRecipe) {
+      if (updatedRecipe) {
+        res.status(204).send();
       }
     })
     // Review delete failed
@@ -155,6 +160,5 @@ export function destroy(req, res) {
       res.status(400);
       res.send(err);
     });
-
 }
 

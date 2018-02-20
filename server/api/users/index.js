@@ -7,7 +7,7 @@ let router = express.Router();
 router.get('/', controller.read);
 router.get('/:id', controller.readOne);
 
-// POST methodlocalhost:3000/api/users
+// POST method
 router.post('/', controller.create);
 
 // PUT method
