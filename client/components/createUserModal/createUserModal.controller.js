@@ -19,7 +19,7 @@ export class CreateUserController {
       })
       .catch(err => {
         console.error(err);
-        this.formError = err.toString();
+        this.formError = err.data;
       });
   }
 }
