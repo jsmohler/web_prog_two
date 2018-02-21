@@ -4,9 +4,10 @@ import routing from './main.routes';
 
 export class MainController {
   /*@ngInject*/
-  constructor($http, User) {
+  constructor($http, $uibModal, User) {
     this.$http = $http;
     this.User = User;
+    this.$uibModal = $uibModal;
     this.setData();
     this.getUserData();
   }
@@ -19,26 +20,32 @@ export class MainController {
   getUserData() {
     this.User.getAllUsers()
       .then(response => {
-        this.users = response.data;
+        this.users = response;
       })
       .catch(error => {
         console.error(error);
       });
   }
-}
 
-export function UserService($http) {
-  'ngInject';
-  var User = {
-    getAllUsers() {
-      return $http.get('/api/users/');
-    },
-
-    getUserById(userId) {
-      return $http.get('/api/users/' + userId);
-    }
+  updateUser(user) {
+    this.$uibModal.open({
+      template: require('../../components/updateUserModal/updateUserModal.html'),
+      controller: 'updateUserController as updateUserController',
+      resolve: {
+        user: () => user
+      }
+    });
   }
-  return User;
+
+  createUser(user) {
+    this.$uibModal.open({
+      template: require('../../components/createUserModal/createUserModal.html'),
+      controller: 'createUserController as createUserController',
+      resolve: {
+        user: () => user
+      }
+    });
+  }
 }
 
 export function SquareFilter() {
@@ -55,6 +62,5 @@ export default angular.module('comp3705App.main', [ngRoute])
     controller: MainController,
     controllerAs: 'mainController'
   })
-  .service('User', UserService)
   .filter('Square', SquareFilter)
   .name;

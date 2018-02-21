@@ -1,38 +1,19 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">Lab 12: User Details</h1>
-      <h1 ng-if="userDetailsController.valueEntered">Viewing User: {{ userDetailsController.id }}</h1>
-      <table class="table">
-        <thead>
-        <tr>
-          <th>Id</th>
-          <th>Age</th>
-          <th>First Name</th>
-          <th>Middle Name</th>
-          <th>Last Name</th>
-          <th>Address Line 1</th>
-          <th>Address Line 2</th>
-          <th>City</th>
-          <th>State</th>
-          <th>Zip</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>{{userDetailsController.users._id}}</td>
-          <td>{{userDetailsController.users.age}}</td>
-          <td>{{userDetailsController.users.name.firstName}}</td>
-          <td>{{userDetailsController.users.name.middleName}}</td>
-          <td>{{userDetailsController.users.name.lastName}}</td>
-          <td>{{userDetailsController.users.address.addressLine1}}</td>
-          <td>{{userDetailsController.users.address.addressLine2}}</td>
-          <td>{{userDetailsController.users.address.city}}</td>
-          <td>{{userDetailsController.users.address.state}}</td>
-          <td>{{userDetailsController.users.address.zip}}</td>
-        </tr>
-        </tbody>
-      </table>
+      <h1 class="page-header">User details for: {{ userDetailsController.id }}</h1>
+      <div>
+          <h3>Id: {{userDetailsController.users._id}}</h3>
+          <h3>Age: {{userDetailsController.users.age}}</h3>
+          <h3>First Name:{{userDetailsController.users.name.firstName}}</h3>
+          <h3>Middle Name: {{userDetailsController.users.name.middleName}}</h3>
+          <h3>Last Name: {{userDetailsController.users.name.lastName}}</h3>
+          <h3>Address Line 1: {{userDetailsController.users.address.addressLine1}}</h3>
+          <h3>Address Line 2: {{userDetailsController.users.address.addressLine2}}</h3>
+          <h3>City: {{userDetailsController.users.address.city}}</h3>
+          <h3>State: {{userDetailsController.users.address.state}}</h3>
+          <h3>Zip: {{userDetailsController.users.address.zip}}</h3>
+      <div>
     </div>
   </div>
 </div>
