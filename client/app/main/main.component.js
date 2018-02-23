@@ -9,12 +9,24 @@ export class MainController {
     this.User = User;
     this.$uibModal = $uibModal;
     this.setData();
+    this.increment();
     this.getUserData();
   }
 
   setData() {
     this.values = ['first', 'second', 'third'];
     this.valueToSquare = 4;
+    this.max = 5;
+    this.maxRating = 10;
+    this.rate = 8;
+    this.isReadOnly = false;
+    this.ratingStates = [
+      {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
+      {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
+      {stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
+      {stateOn: 'glyphicon-heart'},
+      {stateOff: 'glyphicon-off'}
+    ];
   }
 
   getUserData() {
@@ -46,12 +58,29 @@ export class MainController {
       }
     });
   }
+
+  increment() {
+    this.User.getAllUsers()
+      .then(response => {
+        this.users = response;
+        this.current = this.users.length;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  hoveringOver(value) {
+    this.overStar = value;
+    this.percent = 100 * (value / this.maxRating);
+  };
+
 }
 
 export function SquareFilter() {
   var squareFunction = function(value) {
     return value * value;
-  }
+  };
   return squareFunction;
 }
 

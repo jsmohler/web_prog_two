@@ -1,7 +1,6 @@
 import angular from 'angular';
 const ngRoute = require('angular-route');
 import routing from './userDetails.routes';
-import {UserService} from "../main/main.component";
 
 export class UserDetailsController {
   /*@ngInject*/
@@ -12,7 +11,7 @@ export class UserDetailsController {
   }
 
   $onInit() {
-    if (this.$routeParams.id) {
+    if(this.$routeParams.id) {
       this.valueEntered = true;
       this.id = this.$routeParams.id;
     } else {

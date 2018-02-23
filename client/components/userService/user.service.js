@@ -7,13 +7,19 @@ export function UserService($resource) {
       return $resource('/api/users/').query().$promise;
     },
 
+    getNumUsers() {
+      console.log($resource('/api/users/').count());
+      return 0;
+      //return $resource('/api/users/').count().$promise;
+    },
+
     getUserById(userId) {
       return $resource('/api/users/:id').get({id: userId}).$promise;
     },
 
     updateUser(user) {
       let updateResource = $resource('api/users/:id', null, {
-        update: {method : 'PUT'}
+        update: {method:'PUT'}
       });
       return updateResource.update({id: user._id}, user).$promise;
     },
@@ -24,6 +30,6 @@ export function UserService($resource) {
       });
       return createResource.save({id: user._id}, user).$promise;
     }
-  }
+  };
   return User;
 }

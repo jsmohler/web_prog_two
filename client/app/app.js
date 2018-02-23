@@ -5,9 +5,7 @@ import angular from 'angular';
 import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
-
 const ngRoute = require('angular-route');
-
 import uiBootstrap from 'angular-ui-bootstrap';
 
 import {

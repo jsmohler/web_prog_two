@@ -10,7 +10,7 @@ export class AboutController {
   }
 
   $onInit() {
-    if (this.$routeParams.somethingToPrint) {
+    if(this.$routeParams.somethingToPrint) {
       this.valueEntered = true;
       this.somethingToPrint = this.$routeParams.somethingToPrint;
     } else {
