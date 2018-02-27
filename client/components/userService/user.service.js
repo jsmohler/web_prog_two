@@ -7,12 +7,6 @@ export function UserService($resource) {
       return $resource('/api/users/').query().$promise;
     },
 
-    getNumUsers() {
-      console.log($resource('/api/users/').count());
-      return 0;
-      //return $resource('/api/users/').count().$promise;
-    },
-
     getUserById(userId) {
       return $resource('/api/users/:id').get({id: userId}).$promise;
     },
