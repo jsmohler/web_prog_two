@@ -15,8 +15,6 @@ export class MainController {
   }
 
   setData() {
-    this.myInterval = 5000;
-    this.noWrapSlides = false;
     this.active = 0;
     this.maxRating = 10;
     this.rate = 8;
@@ -66,16 +64,6 @@ export class MainController {
       controller: 'createUserController as createUserController',
       resolve: {
         user: () => user
-      }
-    });
-  }
-
-  createRecipe(recipe) {
-    this.$uibModal.open({
-      template: require('../../components/createRecipeModal/createRecipeModal.html'),
-      controller: 'createRecipeController as createRecipeController',
-      resolve: {
-        recipe: () => recipe
       }
     });
   }

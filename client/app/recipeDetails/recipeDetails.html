@@ -1,10 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<style>
+  /*The following style was found at https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_topnav*/
+  .topnav {
+    overflow: hidden;
+    background-color: #333;
+  }
 
-</body>
-</html>
+  .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+</style>
+
+<div class="container">
+  <div class="row topnav">
+    <a href="./submitRecipe/">Submit Recipe</a>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header" align="center">{{ recipeDetailsController.recipes.name }}</h1>
+      <div>
+        <img src="{{recipeDetailsController.recipes.image}}" width="100%"/>
+
+        <table class="table table-responsive table-striped table-bordered">
+          <tr>
+            <th>Description</th>
+            <td colspan="2">{{recipeDetailsController.recipes.description}}</td>
+          </tr>
+          <tr>
+            <th>Prep Time</th>
+            <td colspan="2">{{recipeDetailsController.recipes.prepTime}}</td>
+          </tr>
+          <tr>
+            <th>Cook Time</th>
+            <td colspan="2">{{recipeDetailsController.recipes.cookTime}}</td>
+          </tr>
+          <tr>
+            <th rowspan="{{recipeDetailsController.recipes.ingredients.length}}">Ingredients</th>
+            <td>
+              Name:
+              <ul ng-repeat="ingredient in recipeDetailsController.recipes.ingredients">
+                {{ingredient.name}}
+              </ul>
+            </td>
+            <td>
+              Amount:
+              <ul ng-repeat="ingredient in recipeDetailsController.recipes.ingredients">
+                {{ingredient.amount}}
+              </ul>
+            </td>
+          </tr>
+        </table>
+
+        <h3 align="center"> Directions: </h3>
+        <ul ng-repeat="direction in recipeDetailsController.recipes.directions">
+          <li>{{direction}}</li>
+        </ul>
+
+
+        <footer>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+        </footer>
+        <div>
+        </div>
+      </div>
+    </div>

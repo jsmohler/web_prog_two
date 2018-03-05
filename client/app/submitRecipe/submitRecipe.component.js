@@ -10,8 +10,6 @@ export class SubmitController {
     this.Recipe = Recipe;
     this.$uibModal = $uibModal;
     this.setData();
-    this.getUserData();
-    this.getRecipeData();
   }
 
   setData() {
