@@ -1,0 +1,31 @@
+<div class="modal-content">
+  <form id="createUser" name="createUser" role="form" class="form-horizontal">
+    <div class="modal-header">
+      <button type="button" ng-click="createUserController.cancel()" class="close"><span
+        aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+      <h4 id="myModalLabel" class="modal-title">Creating user {{ createUserController.user._id }}</h4>
+    </div>
+    <div class="modal-body">
+      <div role="alert" ng-show="createUserController.formError" class="alert alert-danger">{{ createUserController.formError }}</div>
+      <div role="alert" ng-show="createUserController.formInfo" class="alert alert-info">{{ createUserController.formInfo }}</div>
+      <div class="form-group">
+        <div class="col-xs-10 col-sm-10">
+          <input id="age" placeholder="Age" name="age" required="required" ng-model="createUserController.user.age" class="form-control"/>
+          <input id="first" placeholder="First Name" name="first" required="required" ng-model="createUserController.user.name.firstName" class="form-control"/>
+          <input id="middle" placeholder="Middle Name" name="middle" ng-model="createUserController.user.name.middleName" class="form-control"/>
+          <input id="last" placeholder="Last Name" name="last" required="required" ng-model="createUserController.user.name.lastName" class="form-control"/>
+          <input id="address1" placeholder="Address Line 1" name="address1" required="required" ng-model="createUserController.user.address.addressLine1" class="form-control"/>
+          <input id="address2" placeholder="Address Line 2" name="address2" ng-model="createUserController.user.address.addressLine2" class="form-control"/>
+          <input id="city" placeholder="City" name="city" required="required" ng-model="createUserController.user.address.city" class="form-control"/>
+          <input id="state" placeholder="State" name="state" required="required" ng-model="createUserController.user.address.state" class="form-control"/>
+          <input id="zip" placeholder="Zip" name="zip" required="required" ng-model="createUserController.user.address.zip" class="form-control"/>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button ng-click="createUserController.cancel()" type="button" class="btn btndefault">
+        Cancel</button>
+      <button type="submit" class="btn btn-primary" ng-click="createUserController.submitForm()">Create User</button>
+    </div>
+  </form>
+</div>

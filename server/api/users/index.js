@@ -4,8 +4,8 @@ import * as controller from './users.controller';
 let router = express.Router();
 
 // GET methods
-router.get('/', controller.read);
-router.get('/:id', controller.readOne);
+router.get('/', controller.index);
+router.get('/:id', controller.show);
 
 // POST method
 router.post('/', controller.create);

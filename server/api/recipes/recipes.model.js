@@ -6,24 +6,31 @@ let Schema = mongoose.Schema;
   that will be used
  */
 
-// This schema represents the ingredients needed for the recipe
-let ingredientsSchema = Schema({
-  ingredients: {type: [String], required:true}
+let ingredients = Schema({
+  name: {type: String, required: true},
+  amount: {type: String, required: true}
 });
 
-// This is the main recipe schema
-let recipeSchema = Schema({
-  name: {type:String, required:true},
-  description: {type:String, required:true},
-  picture: {type:String, required:true},
-  prepTime: {type:Number, required:true},
-  cookingTime: {type:Number, required:true},
-  directions: {type:[String], required:true},
-  ingredients: ingredientsSchema,
-  reviews: {type: [Schema.Types.ObjectId], ref: 'Review', required:false}
-}, {usePushEach: true});
+// This is the main recipes schema
+let recipes = Schema({
+  name: {type: String, required: true},
+  description: {type: String, required: true},
+  image: {type: String, required: true},
+  prepTime: {type: Number, required: true},
+  cookTime: {type: Number, required: true},
+  directions: {type: [String], required: true},
+  ingredients: {type: [ingredients], required: true},
+  reviews: [{type: Schema.Types.ObjectId, ref: 'Review'}]
+}, { usePushEach: true });
 
-let Recipe = mongoose.model('Recipe', recipeSchema);
+/*
+  This section creates interactive models from the defined schemas
+  above so that you can perform Create Read Update and Delete (CRUD)
+  operations against the schemas.
+  NOTE since the nameSchema is embedded within userSchema, it does NOT have
+  to be created as a model!
+ */
+let Recipe = mongoose.model('Recipe', recipes);
 
-// Export the Recipe model
+// Export the created model, Recipe
 export {Recipe};

@@ -1,10 +1,12 @@
 'use strict';
 
 import {Recipe} from './recipes.model';
+import {Review} from './reviews.model';
+import {User} from '../users/users.model';
 
-// Find all recipes
-export function read(req, res) {
+export function index(req, res) {
   Recipe.find()
+    .populate('reviews')
     .exec()
     .then(function(recipes) {
       res.json(recipes);
@@ -16,38 +18,37 @@ export function read(req, res) {
     });
 }
 
-// Find details for a recipe
-export function readOne(req, res) {
-  Recipe.findById(req.params.recipeId)
+export function show(req, res) {
+  Recipe.findById(req.params.id)
+    .populate('reviews')
     .exec()
     .then(function(existingRecipe) {
       if(existingRecipe) {
-        // Recipe was found by Id
         res.status(200);
         res.json(existingRecipe);
       } else {
-        // Recipe was not found
-        res.status(404);
-        res.json({message: 'Not Found'});
+        return Promise.reject(new Error('Recipe not found'));
       }
     })
     .catch(function(err) {
-      res.status(400);
-      console.error(err);
-      res.send(err.toString());
+      if(err.message.toLowerCase().includes('not found')) {
+        res.status(404);
+        res.json({message: err.message});
+      } else {
+        res.status(400);
+        console.error(err);
+        res.send(err.toString());
+      }
     });
 }
 
-// Create a new recipe
 export function create(req, res) {
   let recipe = req.body;
   Recipe.create(recipe)
-    // Recipe saved successfully! return 201 with the created recipe object
     .then(function(createdRecipe) {
       res.status(201);
       res.json(createdRecipe);
     })
-    // An error was encountered during the save of the recipe
     .catch(function(err) {
       res.status(400);
       console.error(err);
@@ -55,84 +56,188 @@ export function create(req, res) {
     });
 }
 
-// Update a recipe
-export function update(req, res) {
-  // This value will be set by the successful update of the recipe so that it can be returned
-  var updatedRecipe;
-  // Start by trying to find the user by its id
+export function createReview(req, res) {
+  let review = req.body;
+  let recipeToUpdate = null;
+  let createdReview = null;
+
   Recipe.findById(req.params.recipeId)
+    .populate('reviews')
     .exec()
-    // Update recipe
     .then(function(existingRecipe) {
-      // If recipe exists, update all fields of the object
+      if(existingRecipe) {
+        recipeToUpdate = existingRecipe;
+        return User.findOne({username: review.user}).exec();
+      } else {
+        return Promise.reject(new Error('Recipe not found'));
+      }
+    })
+    .then(function(existingUser) {
+      if(existingUser) {
+        review.user = existingUser;
+        // Don't allow custom create date
+        if(review.createdDate) {
+          review.createDate = null;
+        }
+        return Review.create(review);
+      } else {
+        return Promise.reject(new Error('User not found'));
+      }
+    })
+    .then(function(savedReview) {
+      recipeToUpdate.reviews.push(savedReview);
+      createdReview = savedReview;
+      return recipeToUpdate.save();
+    })
+    .then(function(savedRecipe) {
+      res.status(201);
+      res.json(createdReview);
+    })
+    .catch(function(err) {
+      if(err.message.toLowerCase().includes('not found')) {
+        res.status(404);
+        res.json({message: err.message});
+      } else {
+        res.status(400);
+        console.error(err);
+        res.send(err.toString());
+      }
+    });
+}
+
+export function update(req, res) {
+  Recipe.findById(req.params.id)
+    .exec()
+    .then(function(existingRecipe) {
       if(existingRecipe) {
         existingRecipe.name = req.body.name;
         existingRecipe.description = req.body.description;
-        existingRecipe.picture = req.body.picture;
+        existingRecipe.image = req.body.image;
         existingRecipe.prepTime = req.body.prepTime;
-        existingRecipe.cookingTime = req.body.cookingTime;
+        existingRecipe.cookTime = req.body.cookTime;
         existingRecipe.directions = req.body.directions;
-        existingRecipe.ingredients.ingredients = req.body.ingredients.ingredients;
-        existingRecipe.reviews = req.body.reviews;
-
-        // Set externally declared updatedRecipe so that later promise can return it
-        updatedRecipe = existingRecipe;
-        return Promise.all([
-          existingRecipe.increment().save()
-        ]);
+        existingRecipe.ingredients = req.body.ingredients;
+        return existingRecipe.increment().save();
       } else {
-        // Recipe was not found
-        return null;
+        return Promise.reject(new Error('Recipe not found'));
       }
     })
-    // This .then will be called after the Promise.all resolves, or be called with null if the recipe was not found
-    .then(function(savedObjects) {
-      // savedObjects should be defined if Promise.all was invoked (recipe was found)
-      if(savedObjects) {
-        res.status(200);
-        res.json(updatedRecipe);
-      } else {
-        // Recipe was not found
-        res.status(404);
-        res.json({message: 'Not Found'});
-      }
+    .then(function(savedRecipe) {
+      res.status(200);
+      res.json(savedRecipe);
     })
-    // Error encountered during the save of the recipe
     .catch(function(err) {
-      res.status(400);
-      console.error(err);
-      res.send(err.toString());
+      if(err.message.toLowerCase().includes('not found')) {
+        res.status(404);
+        res.json({message: err.message});
+      } else {
+        res.status(400);
+        console.error(err);
+        res.send(err.toString());
+      }
     });
 }
 
-// Remove a recipe
+export function updateReview(req, res) {
+  Recipe.findById(req.params.recipeId)
+    .exec()
+    .then(function(existingRecipe) {
+      if(!existingRecipe) {
+        return Promise.reject(new Error('Recipe not found'));
+      } else {
+        return Review.findById(req.params.reviewId);
+      }
+    })
+    .then(function(existingReview) {
+      if(existingReview) {
+        // Don't allow user or create date to be changed on an update of a review
+        existingReview.description = req.body.description;
+        existingReview.rating = req.body.rating;
+        return existingReview.increment().save();
+      } else {
+        return Promise.reject(new Error('Review not found'));
+      }
+    })
+    .then(function(updateStatus) {
+      // update method does not return updated object, query for it here to return from API
+      return Review.findById(req.params.reviewId);
+    })
+    .then(function(updatedReview) {
+      res.status(200);
+      res.json(updatedReview);
+    })
+    .catch(function(err) {
+      if(err.message.toLowerCase().includes('not found')) {
+        res.status(404);
+        res.json({message: err.message});
+      } else {
+        res.status(400);
+        console.error(err);
+        res.send(err.toString());
+      }
+    });
+}
+
 export function destroy(req, res) {
+  Recipe.findById(req.params.id)
+    .populate('reviews')
+    .exec()
+    .then(function(existingRecipe) {
+      if(existingRecipe) {
+        let promises = [];
+        existingRecipe.reviews.forEach(review => promises.push(review.remove()));
+        promises.push(existingRecipe.remove());
+        return Promise.all(promises);
+      } else {
+        return Promise.reject(new Error('Review not found'));
+      }
+    })
+    .then(function(deletedUser) {
+      res.status(204).send();
+    })
+    .catch(function(err) {
+      if(err.message.toLowerCase().includes('not found')) {
+        res.status(404);
+        res.json({message: err.message});
+      } else {
+        res.status(400);
+        console.error(err);
+        res.send(err.toString());
+      }
+    });
+}
+
+export function destroyReview(req, res) {
   Recipe.findById(req.params.recipeId)
     .exec()
     .then(function(existingRecipe) {
       if(existingRecipe) {
-        return Promise.all([
-          existingRecipe.remove()
-        ]);
+        let reviewIndex = existingRecipe.reviews.indexOf(req.params.reviewId);
+        if(reviewIndex !== -1) {
+          existingRecipe.reviews.splice(reviewIndex, 1);
+          return Promise.all([
+            existingRecipe.save(),
+            Review.findByIdAndRemove(req.params.reviewId)
+          ])
+        } else {
+          return Promise.reject(new Error('Review not found in recipe'));
+        }
       } else {
-        return null;
+        return Promise.reject(new Error('Recipe not found'));
       }
     })
-    // Delete was successful
-    .then(function(deletedRecipe) {
-      if(deletedRecipe) {
-        res.status(204).send();
-      } else {
-        // Recipe was not found
-        res.status(404);
-        res.json({message: 'Not Found'});
-      }
+    .then(function(results) {
+      res.status(204).send();
     })
-    // Recipe delete failed
     .catch(function(err) {
-      res.status(400);
-      console.error(err);
-      res.send(err.toString());
+      if(err.message.toLowerCase().includes('not found')) {
+        res.status(404);
+        res.json({message: err.message});
+      } else {
+        res.status(400);
+        console.error(err);
+        res.send(err.toString());
+      }
     });
 }
 

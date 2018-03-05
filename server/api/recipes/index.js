@@ -1,25 +1,22 @@
 import express from 'express';
-import * as recipeController from './recipes.controller';
-import * as reviewController from '../reviews/reviews.controller';
+import * as controller from './recipes.controller';
 
 let router = express.Router();
 
 // GET methods
-router.get('/', recipeController.read);
-router.get('/:recipeId', recipeController.readOne);
-router.get('/:recipeId/reviews', reviewController.read);
-router.get('/:recipeId/reviews/:reviewId', reviewController.readOne);
+router.get('/', controller.index);
+router.get('/:id', controller.show);
 
 // POST method
-router.post('/', recipeController.create);
-router.post('/:recipeId/reviews', reviewController.create);
+router.post('/', controller.create);
+router.post('/:recipeId/reviews', controller.createReview);
 
 // PUT method
-router.put('/:recipeId', recipeController.update);
-router.put('/:recipeId/reviews/:reviewId', reviewController.update);
+router.put('/:id', controller.update);
+router.put('/:recipeId/reviews/:reviewId', controller.updateReview);
 
 // DELETE method
-router.delete('/:recipeId', recipeController.destroy);
-router.delete('/:recipeId/reviews/:reviewId', reviewController.destroy);
+router.delete('/:id', controller.destroy);
+router.delete('/:recipeId/reviews/:reviewId', controller.destroyReview);
 
 export {router};
