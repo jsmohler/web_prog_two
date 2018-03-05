@@ -4,19 +4,20 @@ import routing from './main.routes';
 
 export class MainController {
   /*@ngInject*/
-  constructor($http, $uibModal, User) {
+  constructor($http, $uibModal, User, Recipe) {
     this.$http = $http;
     this.User = User;
+    this.Recipe = Recipe;
     this.$uibModal = $uibModal;
     this.setData();
-    this.increment();
     this.getUserData();
+    this.getRecipeData();
   }
 
   setData() {
-    this.values = ['first', 'second', 'third'];
-    this.valueToSquare = 4;
-    this.max = 5;
+    this.myInterval = 5000;
+    this.noWrapSlides = false;
+    this.active = 0;
     this.maxRating = 10;
     this.rate = 8;
     this.isReadOnly = false;
@@ -33,6 +34,16 @@ export class MainController {
     this.User.getAllUsers()
       .then(response => {
         this.users = response;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  getRecipeData() {
+    this.Recipe.getAllRecipes()
+      .then(response => {
+        this.recipes = response;
       })
       .catch(error => {
         console.error(error);
@@ -59,15 +70,14 @@ export class MainController {
     });
   }
 
-  increment() {
-    this.User.getAllUsers()
-      .then(response => {
-        this.users = response;
-        this.current = this.users.length;
-      })
-      .catch(error => {
-        console.error(error);
-      });
+  createRecipe(recipe) {
+    this.$uibModal.open({
+      template: require('../../components/createRecipeModal/createRecipeModal.html'),
+      controller: 'createRecipeController as createRecipeController',
+      resolve: {
+        recipe: () => recipe
+      }
+    });
   }
 
   hoveringOver(value) {
@@ -77,13 +87,6 @@ export class MainController {
 
 }
 
-export function SquareFilter() {
-  var squareFunction = function(value) {
-    return value * value;
-  };
-  return squareFunction;
-}
-
 export default angular.module('comp3705App.main', [ngRoute])
   .config(routing)
   .component('main', {
@@ -91,5 +94,4 @@ export default angular.module('comp3705App.main', [ngRoute])
     controller: MainController,
     controllerAs: 'mainController'
   })
-  .filter('Square', SquareFilter)
   .name;

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="submitRecipe.html" method="post">
+  <h3> Fill out your contact information and we'll get back to you! </h3>
+  <fieldset>
+    <label for="name" class="contact">Name: <input type="text" id="name" name="username" placeholder="First and Last Name"></label>
+
+    <br>
+    <br>
+
+    <label for="emailAdr" class="contact">Email: <input type="email" id="emailAdr" name="email"></label>
+
+    <br>
+    <br>
+
+    <label for="phoneNum" class="contact">Phone Number: <input type="tel" id="phoneNum" name="telephone" pattern="[\d]{10}$" title="10-digit US phone number"></label>
+
+  </fieldset>
+
+  <fieldset>
+    <legend> Prefer to send a message anonymously? </legend>
+    <label> Add your message here:
+      <textarea placeholder="No more than 500 characters" id="message" maxlength="500" onkeyup="update();"></textarea>
+      <p id="char"> Character count: </p>
+  </fieldset>
+
+  <button type="button" id="send" onclick="msg();" class="button">Send</button>
+  <button type="reset" name="clear" class="button">Reset Form</button>
+
+</form>
+
+</body>
+</html>

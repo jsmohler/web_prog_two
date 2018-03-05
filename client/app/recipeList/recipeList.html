@@ -5,6 +5,17 @@
     <title>Title</title>
 </head>
 <body>
-
+<table class="table table-responsive table-striped table-bordered">
+  <thead>
+  <tr>
+    <th>Name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="recipe in mainController.recipes">
+    <td>{{recipe.name}}</td>
+  </tr>
+  </tbody>
+</table>
 </body>
 </html>
