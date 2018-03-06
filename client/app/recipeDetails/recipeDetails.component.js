@@ -95,9 +95,9 @@ export class RecipeDetailsController {
     });
   }
 
-  updateIngredient(recipe) {
+  updateIngredients(recipe) {
     this.$uibModal.open({
-      template: require('../../components/updateRecipeModal/updateRecipeModalIngredient.html'),
+      template: require('../../components/updateRecipeModal/updateRecipeModalEditIngredients.html'),
       controller: 'updateRecipeController as updateRecipeController',
       resolve: {
         recipe: () => recipe
@@ -148,7 +148,20 @@ export class RecipeDetailsController {
       });
   }
 
-  updateDirection(recipe) {
+  deleteIngredient(name, amount) {
+    var recipe = this.recipes;
+    var ingredient = {
+      name: name,
+      amount: amount
+    };
+    recipe.ingredients.splice(recipe.ingredients.indexOf(ingredient), 1);
+    this.Recipe.updateRecipe(recipe)
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  updateDirections(recipe) {
     this.$uibModal.open({
       template: require('../../components/updateRecipeModal/updateRecipeModalEditDirections.html'),
       controller: 'updateRecipeController as updateRecipeController',

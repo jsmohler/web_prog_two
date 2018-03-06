@@ -21,14 +21,11 @@ export class UpdateRecipeController {
     if (this.command === "addIng") {
       var name = document.getElementById('ingredient').value;
       var amount = document.getElementById('ingredientAmount').value;
-
       var ingredient = {
         name: name,
         amount: amount
       }
-
       this.recipe.ingredients.push(ingredient);
-
     } else if (this.command === "cook") {
       this.recipe.cookTime = parseInt(document.getElementById('cook').value);
     } else if (this.command === "description") {
@@ -40,14 +37,26 @@ export class UpdateRecipeController {
     } else if (this.command === "prep") {
       this.recipe.prepTime = parseInt(document.getElementById('prep').value);
     } else if (this.command === "addDir") {
-      this.recipe.directions.push(document.getElementById('direction').value);
+      this.recipe.directions.push(document.getElementsByName('direction')[0].value);
     } else if (this.command === "editDir") {
       var directions = document.getElementsByName('direction');
       var newDirections = [];
       for (var i = 0; i < directions.length; i++) {
         newDirections.push(directions[i].value);
       }
+      console.log(newDirections);
       this.recipe.directions = newDirections;
+    } else if (this.command === "editIng") {
+      var ingredientNames = document.getElementsByName('ingredientName');
+      var ingredientAmounts = document.getElementsByName('ingredientAmount');
+      var newIngredients = [];
+      var ingredient = {};
+      for (var i = 0; i < ingredientNames.length; i++) {
+        ingredient.name = ingredientNames[i].value;
+        ingredient.amount = ingredientAmounts[i].value;
+        newIngredients.push(ingredient);
+      }
+      this.recipe.ingredients = newIngredients;
     } else {
       this.formError("Error processing " + this.command);
       return;
