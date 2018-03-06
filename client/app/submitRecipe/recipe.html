@@ -32,7 +32,6 @@
   input {
     width: 65%;
     height: 1.5em;
-    margin-bottom: 1em;
   }
 
   .contact {
@@ -44,7 +43,7 @@
 
   fieldset {
     color: darkblue;
-    margin-top: 0.5em;
+    margin-top: 0.25em;
     border-radius: 10px;
     padding: 1em;
   }
@@ -80,9 +79,9 @@
           <br>
           <label for="image" class="contact">Image URL: <input id="image" name="image" required="required" ng-model="recipeController.recipes.image" class="form-control"/></label>
           <br>
-          <label for="prep" class="contact">Prep Time: <input id="prep" name="prep" required="required" ng-model="recipeController.recipes.prepTime" class="form-control"/></label>
+          <label for="prepTime" class="contact">Prep Time: <input id="prepTime" name="prepTime" required="required" ng-model="recipeController.recipes.prepTime" class="form-control"/></label>
           <br>
-          <label for="cook" class="contact">Cook Time: <input id="cook" name="cook" required="required" ng-model="recipeController.recipes.cookTime" class="form-control"/></label>
+          <label for="cookTime" class="contact">Cook Time: <input id="cookTime" name="cookTime" required="required" ng-model="recipeController.recipes.cookTime" class="form-control"/></label>
           <br>
           <table style="width:85%;" id="ingredients">
             <tr>
@@ -91,16 +90,16 @@
             </tr>
             <tr>
               <td>
-                <input id="ingredientName" name="ingredientName" required="required" ng-model="recipeController.recipes.ingredients.name" class="form-control"/>
+                <input name="ingredients[name]" required="required" ng-model="recipeController.recipes.ingredients.name" class="form-control"/>
               </td>
               <td>
-                <input id="ingredientAmount" name="ingredientAmount" required="required" ng-model="recipeController.recipes.ingredients.amount" class="form-control"/>
+                <input name="ingredients[amount]" required="required" ng-model="recipeController.recipes.ingredients.amount" class="form-control"/>
               </td>
             </tr>
           </table>
           <br>
-          <label for="direction" class="contact">Directions:
-            <div id="dir"><input id="direction" name="direction" required="required" ng-model="recipeController.recipes.directions[0]" class="form-control"/></div>
+          <label class="contact">Directions:
+            <div id="dir"><input name="directions" required="required" ng-model="recipeController.recipes.directions" class="form-control"/></div>
           </label>
           <br>
         </fieldset>

@@ -27,12 +27,33 @@ export class RecipeController {
   submitForm() {
     var form = document.getElementById('myForm');
     var formData = new FormData(form);
-    var object = {};
-    formData.forEach(function(value, key){
-      object[key] = value;
+    var object = {
+      "directions": [],
+      "ingredients": []
+    };
+    var ingredient = {};
+    formData.forEach(function(value, key) {
+      if (key == "directions") {
+        object.directions.push(value);
+      } else if (key == "ingredients[name]") {
+        ingredient = {};
+        ingredient.name = value;
+      } else if (key == "ingredients[amount]") {
+        ingredient.amount = parseInt(value);
+        object.ingredients.push(ingredient);
+      } else {
+        object[key] = value;
+      }
     });
     var json = JSON.stringify(object);
-    console.log(json);
+    this.Recipe.createRecipe(json)
+      .then(result => {
+        this.formInfo = 'Recipe successfully created!';
+      })
+      .catch(err => {
+        console.error(err);
+        this.formError = err.toString();
+      });
   }
 
   addIngr() {
@@ -44,11 +65,13 @@ export class RecipeController {
     nameInput.setAttribute("required", "required");
     nameInput.setAttribute("ng-model", "recipeController.recipes.ingredients.name");
     nameInput.setAttribute("class", "form-control");
+    nameInput.setAttribute("name", "ingredients[name]");
 
     var amountInput = document.createElement("input");
     amountInput.setAttribute("required", "required");
     amountInput.setAttribute("ng-model", "recipeController.recipes.ingredients.amount");
     amountInput.setAttribute("class", "form-control");
+    amountInput.setAttribute("name", "ingredients[amount]");
 
     name.appendChild(nameInput);
     amount.appendChild(amountInput);
@@ -63,8 +86,9 @@ export class RecipeController {
     var div = document.getElementById("dir");
     var input = document.createElement("input");
     input.setAttribute("required", "required");
-    input.setAttribute("ng-model", "recipeController.recipes.directions[0]");
+    input.setAttribute("ng-model", "recipeController.recipes.directions");
     input.setAttribute("class", "form-control");
+    input.setAttribute("name", "directions");
 
     div.appendChild(input);
   }

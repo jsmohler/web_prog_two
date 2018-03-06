@@ -23,6 +23,13 @@ export function UserService($resource) {
         create: {method : 'POST'}
       });
       return createResource.save({id: user._id}, user).$promise;
+    },
+
+    createRecipe(recipe) {
+      let createResource = $resource('api/recipes/', null, {
+        create: {method : 'POST'}
+      });
+      return createResource.save({id: recipe._id}, recipe).$promise;
     }
   };
   return User;
