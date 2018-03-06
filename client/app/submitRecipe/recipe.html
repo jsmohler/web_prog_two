@@ -18,6 +18,50 @@
     background-color: #ddd;
     color: black;
   }
+
+  form {
+    width: 75%;
+    box-shadow: 4px 4px 3px #666;
+    border-radius: 12px;
+    border: 1px solid black;
+    padding: 0em 2em 2em 2em;
+    background-color: rgba(230,230,230,0.8);
+    margin-bottom: 2em;
+  }
+
+  input {
+    width: 65%;
+    height: 1.5em;
+    margin-bottom: 1em;
+  }
+
+  .contact {
+    width: 85%;
+    align:center;
+    display: block;
+    text-align: left;
+  }
+
+  fieldset {
+    color: darkblue;
+    margin-top: 0.5em;
+    border-radius: 10px;
+    padding: 1em;
+  }
+
+  .button {
+    display: inline;
+    float: right;
+    border-radius: 5px;
+    background-color: white;
+    margin-top: -1em;
+  }
+
+  #send {
+    background-color: red;
+    color: white;
+  }
+
 </style>
 
 <div class="container">
@@ -26,9 +70,48 @@
     <a href="./recipes/">Submit Recipe</a>
   </div>
   <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Project 2</h1>
+    <div class="col-lg-12" align="center">
+      <h1 class="page-header" align="center">Add New Recipe</h1>
+      <form id="myForm" enctype='application/json'>
+        <fieldset>
+          <label for="name" class="contact">Name: <input id="name" name="name" required="required" ng-model="recipeController.recipes.name" class="form-control"/></label>
+          <br>
+          <label for="description" class="contact">Description: <input id="description" name="description" required="required" ng-model="recipeController.recipes.description" class="form-control"/></label>
+          <br>
+          <label for="image" class="contact">Image URL: <input id="image" name="image" required="required" ng-model="recipeController.recipes.image" class="form-control"/></label>
+          <br>
+          <label for="prep" class="contact">Prep Time: <input id="prep" name="prep" required="required" ng-model="recipeController.recipes.prepTime" class="form-control"/></label>
+          <br>
+          <label for="cook" class="contact">Cook Time: <input id="cook" name="cook" required="required" ng-model="recipeController.recipes.cookTime" class="form-control"/></label>
+          <br>
+          <table style="width:85%;" id="ingredients">
+            <tr>
+              <th>Name</th>
+              <th>Amount</th>
+            </tr>
+            <tr>
+              <td>
+                <input id="ingredientName" name="ingredientName" required="required" ng-model="recipeController.recipes.ingredients.name" class="form-control"/>
+              </td>
+              <td>
+                <input id="ingredientAmount" name="ingredientAmount" required="required" ng-model="recipeController.recipes.ingredients.amount" class="form-control"/>
+              </td>
+            </tr>
+          </table>
+          <br>
+          <label for="direction" class="contact">Directions:
+            <div id="dir"><input id="direction" name="direction" required="required" ng-model="recipeController.recipes.directions[0]" class="form-control"/></div>
+          </label>
+          <br>
+        </fieldset>
 
+        <div class="buttons" style="margin-right:10%">
+          <button type="button" id="send" ng-click="recipeController.submitForm();" class="button">Send</button>
+          <button type="reset" name="clear" class="button">Reset Form</button>
+          <button type="button" id="addIngr" ng-click="recipeController.addIngr();" class="button">Add Ingredient</button>
+          <button type="button" id="addDire" ng-click="recipeController.addDire();" class="button">Add Direction</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
