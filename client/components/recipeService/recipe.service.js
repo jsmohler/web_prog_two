@@ -23,6 +23,13 @@ export function RecipeService($resource) {
         create: {method : 'POST'}
       });
       return createResource.save({id: recipe._id}, recipe).$promise;
+    },
+
+    destroyRecipe(recipe) {
+      let createResource = $resource('api/recipes/:id', null, {
+        create: {method : 'DELETE'}
+      });
+      return createResource.remove({id: recipe._id}, recipe).$promise;
     }
   };
   return Recipe;

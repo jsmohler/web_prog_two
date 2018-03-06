@@ -18,6 +18,14 @@
     background-color: #ddd;
     color: black;
   }
+
+  a {
+    color: black;
+  }
+
+  a:hover {
+    color: black;
+  }
 </style>
 
 <div class="container">
@@ -26,45 +34,49 @@
   </div>
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header" align="center">{{ recipeDetailsController.recipes.name }}</h1>
+      <h1 class="page-header" align="center"><a ng-click="recipeDetailsController.updateName(recipeDetailsController.recipes)">{{ recipeDetailsController.recipes.name }}</a></h1>
       <div>
-        <img src="{{recipeDetailsController.recipes.image}}" width="100%"/>
+        <div style="width:100%;height:600px;overflow:hidden;align:center;">
+        <a ng-click="recipeDetailsController.updateImage(recipeDetailsController.recipes)"><img src="{{recipeDetailsController.recipes.image}}"/></a>
+        </div>
 
         <table class="table table-responsive table-striped table-bordered">
           <tr>
             <th>Description</th>
-            <td colspan="2">{{recipeDetailsController.recipes.description}}</td>
+            <td colspan="2"><a ng-click="recipeDetailsController.updateDescription(recipeDetailsController.recipes)">{{recipeDetailsController.recipes.description}}</a></td>
           </tr>
           <tr>
             <th>Prep Time</th>
-            <td colspan="2">{{recipeDetailsController.recipes.prepTime}}</td>
+            <td colspan="2"><a ng-click="recipeDetailsController.updatePrep(recipeDetailsController.recipes)">{{recipeDetailsController.recipes.prepTime}}</a></td>
           </tr>
           <tr>
             <th>Cook Time</th>
-            <td colspan="2">{{recipeDetailsController.recipes.cookTime}}</td>
+            <td colspan="2"><a ng-click="recipeDetailsController.updateCook(recipeDetailsController.recipes)">{{recipeDetailsController.recipes.cookTime}}</a></td>
           </tr>
           <tr>
-            <th rowspan="{{recipeDetailsController.recipes.ingredients.length}}">Ingredients</th>
-            <td>
-              Name:
-              <ul ng-repeat="ingredient in recipeDetailsController.recipes.ingredients">
-                {{ingredient.name}}
-              </ul>
+            <th>Ingredients</th>
+            <td rowspan="2">
+              <table class="table table-responsive table-striped table-bordered">
+                <tr>
+                  <th>Name</th>
+                  <th>Amount</th>
+                </tr>
+                <tr ng-repeat="ingredient in recipeDetailsController.recipes.ingredients">
+                  <td>{{ingredient.name}}</td>
+                  <td>{{ingredient.amount}}</td>
+                </tr>
+              </table>
             </td>
-            <td>
-              Amount:
-              <ul ng-repeat="ingredient in recipeDetailsController.recipes.ingredients">
-                {{ingredient.amount}}
-              </ul>
-            </td>
+          </tr>
+          <tr>
+            <td><button ng-click="recipeDetailsController.addIngredient()" type="button" class="btn btn-default">Add Ingredient</button></td>
           </tr>
         </table>
 
-        <h3 align="center"> Directions: </h3>
+        <h3 align="center">Directions:</h3>
         <ul ng-repeat="direction in recipeDetailsController.recipes.directions">
-          <li>{{direction}}</li>
+          <li><a ng-click="recipeDetailsController.updateDirection(recipeDetailsController.recipes)">{{direction}}</a></li>
         </ul>
-
 
         <footer>
           <br>
