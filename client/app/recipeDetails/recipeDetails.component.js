@@ -139,6 +139,15 @@ export class RecipeDetailsController {
     });
   }
 
+  deleteDirection(direction) {
+    var recipe = this.recipes;
+    recipe.directions.splice(recipe.directions.indexOf(direction), 1);
+    this.Recipe.updateRecipe(recipe)
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
   updateDirection(recipe) {
     this.$uibModal.open({
       template: require('../../components/updateRecipeModal/updateRecipeModalEditDirections.html'),

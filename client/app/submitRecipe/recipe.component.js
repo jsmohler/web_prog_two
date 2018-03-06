@@ -39,16 +39,18 @@ export class RecipeController {
         ingredient = {};
         ingredient.name = value;
       } else if (key == "ingredients[amount]") {
-        ingredient.amount = parseInt(value);
+        ingredient.amount = value;
         object.ingredients.push(ingredient);
       } else {
         object[key] = value;
       }
     });
     var json = JSON.stringify(object);
+
     this.Recipe.createRecipe(json)
       .then(result => {
-        this.formInfo = 'Recipe successfully created!';
+        location.reload();
+        window.alert('Recipe successfully created!');
       })
       .catch(err => {
         console.error(err);

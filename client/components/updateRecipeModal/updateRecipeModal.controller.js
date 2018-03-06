@@ -53,7 +53,6 @@ export class UpdateRecipeController {
       return;
     }
 
-    console.log(this.recipe);
     this.Recipe.updateRecipe(this.recipe)
       .then(result => {
         this.formInfo = 'Recipe successfully updated!';
