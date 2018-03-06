@@ -82,7 +82,7 @@
             </td>
           </tr>
           <tr>
-            <td><button ng-click="recipeDetailsController.addIngredient()" type="button" class="btn btn-default">Add Ingredient</button></td>
+            <td><button ng-click="recipeDetailsController.addIngredient(recipeDetailsController.recipes)" type="button" class="btn btn-default">Add Ingredient</button></td>
           </tr>
         </table>
 
@@ -90,6 +90,8 @@
         <ul ng-repeat="direction in recipeDetailsController.recipes.directions">
           <li><a ng-click="recipeDetailsController.updateDirection(recipeDetailsController.recipes)">{{direction}}</a></li>
         </ul>
+
+        <button ng-click="recipeDetailsController.addDirection(recipeDetailsController.recipes)" type="button" class="btn btn-default">Add Direction</button>
 
         <h3 align="center">Reviews</h3>
         <div ng-repeat="review in recipeDetailsController.recipes.reviews" border="solid">

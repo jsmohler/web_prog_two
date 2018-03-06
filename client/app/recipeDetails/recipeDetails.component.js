@@ -129,9 +129,19 @@ export class RecipeDetailsController {
     });
   }
 
-  updateDirection(recipe) {
+  addDirection(recipe) {
     this.$uibModal.open({
       template: require('../../components/updateRecipeModal/updateRecipeModalDirection.html'),
+      controller: 'updateRecipeController as updateRecipeController',
+      resolve: {
+        recipe: () => recipe
+      }
+    });
+  }
+
+  updateDirection(recipe) {
+    this.$uibModal.open({
+      template: require('../../components/updateRecipeModal/updateRecipeModalEditDirections.html'),
       controller: 'updateRecipeController as updateRecipeController',
       resolve: {
         recipe: () => recipe

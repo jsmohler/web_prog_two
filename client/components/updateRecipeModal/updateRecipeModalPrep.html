@@ -6,19 +6,21 @@
       <h4 id="myModalLabel" class="modal-title">Updating recipe {{ updateRecipeController.recipe._id }}</h4>
     </div>
     <div class="modal-body">
-      <div role="alert" ng-show="updateRecipeController.formError" class="alert alert-danger">{{ updateRecipeController.formError }}</div>
-      <div role="alert" ng-show="updateRecipeController.formInfo" class="alert alert-info">{{ updateRecipeController.formInfo }}</div>
+      <div role="alert" ng-show="updateRecipeController.formError" class="alert alert-danger">{{
+        updateRecipeController.formError }}</div>
+      <div role="alert" ng-show="updateRecipeController.formInfo" class="alert alert-info">{{
+        updateRecipeController.formInfo }}</div>
       <div class="form-group">
         <label for="prep" class="col-xs-2 col-sm-2 control-label">Prep Time</label>
         <div class="col-xs-10 col-sm-10">
-          <input id="prep" name="prep" required="required" ng-model="updateRecipeController.recipe.prepTime" class="form-control"/>
+          <input id="prep" name="prep" required="required" class="form-control"/>
         </div>
       </div>
     </div>
     <div class="modal-footer">
       <button ng-click="updateRecipeController.cancel()" type="button" class="btn btndefault">
         Cancel</button>
-      <button type="submit" class="btn btn-primary" ng-click="updateRecipeController.submitForm()">Update Recipe</button>
+      <button type="submit" class="btn btn-primary" ng-click="updateRecipeController.cmand('prep');updateRecipeController.submitForm()">Update Recipe</button>
     </div>
   </form>
 </div>

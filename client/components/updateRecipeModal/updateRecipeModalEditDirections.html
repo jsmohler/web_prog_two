@@ -11,16 +11,16 @@
       <div role="alert" ng-show="updateRecipeController.formInfo" class="alert alert-info">{{
         updateRecipeController.formInfo }}</div>
       <div class="form-group">
-        <label for="cook" class="col-xs-2 col-sm-2 control-label">Cook Time</label>
-        <div class="col-xs-10 col-sm-10">
-          <input id="cook" name="cook" required="required" class="form-control"/>
+        <label class="col-xs-2 col-sm-2 control-label">Direction</label>
+        <div class="col-xs-10 col-sm-10" ng-repeat="direction in updateRecipeController.recipe.directions">
+          <input name="direction" required="required" class="form-control" ng-model="direction"/>
         </div>
       </div>
     </div>
     <div class="modal-footer">
       <button ng-click="updateRecipeController.cancel()" type="button" class="btn btndefault">
         Cancel</button>
-      <button type="submit" class="btn btn-primary" ng-click="updateRecipeController.cmand('cook');updateRecipeController.submitForm()">Update Recipe</button>
+      <button type="submit" class="btn btn-primary" ng-click="updateRecipeController.cmand('editDir');updateRecipeController.submitForm()">Update Recipe</button>
     </div>
   </form>
 </div>
