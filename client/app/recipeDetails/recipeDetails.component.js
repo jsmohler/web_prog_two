@@ -9,6 +9,7 @@ export class RecipeDetailsController {
     this.$uibModal = $uibModal;
     this.Recipe = Recipe;
     this.getRecipeData();
+    this.setData();
   }
 
   $onInit() {
@@ -18,6 +19,20 @@ export class RecipeDetailsController {
     } else {
       this.valueEntered = false;
     }
+  }
+
+  setData() {
+    this.active = 0;
+    this.maxRating = 5;
+    this.rate = 8;
+    this.isReadOnly = false;
+    this.ratingStates = [
+      {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
+      {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
+      {stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
+      {stateOn: 'glyphicon-heart'},
+      {stateOff: 'glyphicon-off'}
+    ];
   }
 
   getRecipeData() {
@@ -85,6 +100,20 @@ export class RecipeDetailsController {
       template: require('../../components/updateRecipeModal/updateRecipeModalIngredient.html'),
       controller: 'updateRecipeController as updateRecipeController',
       resolve: {
+        recipe: () => recipe
+      }
+    });
+  }
+
+  updateReview(review, recipe) {
+    console.log(review);
+    console.log(recipe);
+    this.$uibModal.open({
+      template: require('../../components/updateReviewModal/updateReviewModalDescription.html'),
+      controller: 'updateReviewController',
+      controllerAs: 'updateReviewController',
+      resolve: {
+        review: () => review,
         recipe: () => recipe
       }
     });

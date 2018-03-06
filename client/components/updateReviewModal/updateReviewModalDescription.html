@@ -1,0 +1,23 @@
+<div class="modal-content">
+  <form id="updateReview" name="updateReview" role="form" class="form-horizontal">
+    <div class="modal-header">
+      <button type="button" ng-click="updateReviewController.cancel()" class="close"><span
+        aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    </div>
+    <div class="modal-body">
+      <div role="alert" ng-show="updateReviewController.formError" class="alert alert-danger">{{ updateReviewController.formError }}</div>
+      <div role="alert" ng-show="updateReviewController.formInfo" class="alert alert-info">{{ updateReviewController.formInfo }}</div>
+      <div class="form-group">
+        <label for="cook" class="col-xs-2 col-sm-2 control-label">Cook Time</label>
+        <div class="col-xs-10 col-sm-10">
+          <input id="cook" name="cook" required="required" ng-model="updateReviewController.review.description" class="form-control"/>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button ng-click="updateReviewController.cancel()" type="button" class="btn btndefault">
+        Cancel</button>
+      <button type="submit" class="btn btn-primary" ng-click="updateReviewController.submitForm()">Update Review</button>
+    </div>
+  </form>
+</div>
