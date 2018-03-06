@@ -86,9 +86,9 @@
           </tr>
         </table>
 
-        <h3 align="center">Directions:</h3>
+        <h3 align="center"><a ng-click="recipeDetailsController.updateDirection(recipeDetailsController.recipes)">Directions:</a></h3>
         <ul ng-repeat="direction in recipeDetailsController.recipes.directions">
-          <li><a ng-click="recipeDetailsController.updateDirection(recipeDetailsController.recipes)">{{direction}}</a></li>
+          <li>{{direction}}</li>
         </ul>
 
         <button ng-click="recipeDetailsController.addDirection(recipeDetailsController.recipes)" type="button" class="btn btn-default">Add Direction</button>

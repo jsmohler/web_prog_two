@@ -38,6 +38,7 @@
           <th>Description</th>
           <th>Prep Time (min)</th>
           <th>Cook Time (min)</th>
+          <th>Delete Recipe</th>
         </tr>
         </thead>
         <tbody>
@@ -46,6 +47,8 @@
           <td>{{recipe.description}}</td>
           <td>{{recipe.prepTime}}</td>
           <td>{{recipe.cookTime}}</td>
+          <td><button ng-click="mainController.deleteRecipe(recipe)" type="button" class="btn btn-default">Delete {{recipe._id}}</button>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -54,11 +57,6 @@
       <footer>
         <br>
         <br>
-        <br>
-        <h4>Rate This Site!</h4>
-        <span uib-rating ng-model="mainController.rate" max="mainController.maxRating" on-hover="mainController.hoveringOver(value)" on-leave="mainController.overStar = null" titles="['one','two','three']"></span>
-        <span class="label" ng-class="{'label-warning': mainController.percent<30, 'label-info': mainController.percent>=30 && mainController.percent<70, 'label-success': mainController.percent>=70}" ng-show="mainController.overStar">{{mainController.percent}}%</span>
-        <pre style="margin:15px 0;">Rate: <b>{{mainController.rate}}</b> - Hovering over: <b>{{mainController.overStar || "none"}}</b></pre>
         <br>
         <br>
         <br>

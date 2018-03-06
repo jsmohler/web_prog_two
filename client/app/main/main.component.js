@@ -48,24 +48,14 @@ export class MainController {
       });
   }
 
-  updateUser(user) {
-    this.$uibModal.open({
-      template: require('../../components/updateUserModal/updateUserModal.html'),
-      controller: 'updateUserController as updateUserController',
-      resolve: {
-        user: () => user
-      }
-    });
-  }
-
-  createUser(user) {
-    this.$uibModal.open({
-      template: require('../../components/createUserModal/createUserModal.html'),
-      controller: 'createUserController as createUserController',
-      resolve: {
-        user: () => user
-      }
-    });
+  deleteRecipe(recipe) {
+    this.Recipe.destroyRecipe(recipe)
+      .then(result => {
+        location.reload();
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 
   hoveringOver(value) {
