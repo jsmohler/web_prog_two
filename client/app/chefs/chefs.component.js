@@ -43,7 +43,7 @@ export class ChefController {
     });
   }
 
-  delete(user) {
+  deleteUser(user) {
     this.User.destroyUser(user)
       .then(result => {
         location.reload();
