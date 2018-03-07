@@ -4,13 +4,11 @@ import routing from './main.routes';
 
 export class MainController {
   /*@ngInject*/
-  constructor($http, $uibModal, User, Recipe) {
+  constructor($http, $uibModal, Recipe) {
     this.$http = $http;
-    this.User = User;
     this.Recipe = Recipe;
     this.$uibModal = $uibModal;
     this.setData();
-    this.getUserData();
     this.getRecipeData();
   }
 
@@ -26,16 +24,6 @@ export class MainController {
       {stateOn: 'glyphicon-heart'},
       {stateOff: 'glyphicon-off'}
     ];
-  }
-
-  getUserData() {
-    this.User.getAllUsers()
-      .then(response => {
-        this.users = response;
-      })
-      .catch(error => {
-        console.error(error);
-      });
   }
 
   getRecipeData() {

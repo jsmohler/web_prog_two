@@ -9,9 +9,11 @@
       <div role="alert" ng-show="updateUserController.formError" class="alert alert-danger">{{ updateUserController.formError }}</div>
       <div role="alert" ng-show="updateUserController.formInfo" class="alert alert-info">{{ updateUserController.formInfo }}</div>
       <div class="form-group">
-        <label for="age" class="col-xs-2 col-sm-2 control-label">Age</label>
-        <div class="col-xs-10 col-sm-10">
-          <input id="age" name="age" required="required" ng-model="updateUserController.user.age" class="form-control"/>
+        <label for="user" class="col-xs-2 col-sm-2 control-label">Age</label>
+        <div id="user" class="col-xs-10 col-sm-10">
+          <input id="first" name="first" value="{{updateUserController.user.name.firstName}}" class="form-control"/>
+          <input id="last" name="last" value="{{updateUserController.user.name.lastName}}" class="form-control"/>
+          <input id="email" name="email" value="{{updateUserController.user.email}}" class="form-control"/>
         </div>
       </div>
     </div>

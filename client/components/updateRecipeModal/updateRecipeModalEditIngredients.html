@@ -18,8 +18,8 @@
         <br>
         <br>
         <div ng-repeat="ingredient in updateRecipeController.recipe.ingredients">
-           <input align="right" name="ingredientName" required="required" class="form-control" ng-model="ingredient.name"/>
-           <input align="left" name="ingredientAmount" required="required" class="form-control" ng-model="ingredient.amount"/>
+           <input align="right" name="ingredientName" required="required" class="form-control" value="{{ingredient.name}}"/>
+           <input align="left" name="ingredientAmount" required="required" class="form-control" value="{{ingredient.amount}}"/>
          </div>
       </div>
     </div>

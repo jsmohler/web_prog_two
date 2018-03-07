@@ -25,12 +25,12 @@ export function UserService($resource) {
       return createResource.save({id: user._id}, user).$promise;
     },
 
-    createRecipe(recipe) {
-      let createResource = $resource('api/recipes/', null, {
-        create: {method : 'POST'}
+    destroyUser(user) {
+      let createResource = $resource('api/users/:id', null, {
+        create: {method : 'DELETE'}
       });
-      return createResource.save({id: recipe._id}, recipe).$promise;
-    }
+      return createResource.remove({id: user._id}, user).$promise;
+    },
   };
   return User;
 }

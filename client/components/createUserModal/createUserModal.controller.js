@@ -16,6 +16,7 @@ export class CreateUserController {
     this.User.createUser(this.user)
       .then(result => {
         this.formInfo = 'New User ID: ' + result._id;
+        location.reload();
       })
       .catch(err => {
         console.error(err);

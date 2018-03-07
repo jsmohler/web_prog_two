@@ -44,14 +44,14 @@ export class UpdateRecipeController {
       for (var i = 0; i < directions.length; i++) {
         newDirections.push(directions[i].value);
       }
-      console.log(newDirections);
+
       this.recipe.directions = newDirections;
     } else if (this.command === "editIng") {
       var ingredientNames = document.getElementsByName('ingredientName');
       var ingredientAmounts = document.getElementsByName('ingredientAmount');
       var newIngredients = [];
-      var ingredient = {};
       for (var i = 0; i < ingredientNames.length; i++) {
+        var ingredient = {};
         ingredient.name = ingredientNames[i].value;
         ingredient.amount = ingredientAmounts[i].value;
         newIngredients.push(ingredient);

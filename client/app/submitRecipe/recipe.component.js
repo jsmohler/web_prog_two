@@ -8,20 +8,9 @@ export class RecipeController {
     this.$routeParams = $routeParams;
     this.$uibModal = $uibModal;
     this.Recipe = Recipe;
-    this.setData();
   }
 
   $onInit() {
-    if (this.$routeParams.id) {
-      this.valueEntered = true;
-      this.id = this.$routeParams.id;
-    } else {
-      this.valueEntered = false;
-    }
-  }
-
-  setData() {
-
   }
 
   submitForm() {

@@ -28,30 +28,30 @@
   </div>
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">World's Worst Cookbook</h1>
-
+      <h1 class="page-header">Our Chefs</h1>
       <table class="table table-responsive table-striped table-bordered">
         <thead>
         <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Prep Time (min)</th>
-          <th>Cook Time (min)</th>
-          <th>Delete Recipe</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Edit Chef</th>
+          <th>Delete Chef</th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="recipe in mainController.recipes">
-          <td><a ng-href="./recipes/{{recipe._id}}">{{recipe.name}}</a></td>
-          <td>{{recipe.description}}</td>
-          <td>{{recipe.prepTime}}</td>
-          <td>{{recipe.cookTime}}</td>
-          <td><button ng-click="mainController.deleteRecipe(recipe)" type="button" class="btn btn-default">Delete {{recipe._id}}</button>
-          </td>
+        <tr ng-repeat="chef in chefController.users">
+          <td>{{chef.name.firstName}}</td>
+          <td> {{chef.name.lastName}}</td>
+          <td>{{chef.username}}</td>
+          <td>{{chef.email}}</td>
+          <td><button id="edit" ng-click="chefController.edit(chef)" type="button" class="btn btn-default">Edit {{chef._id}}</button></td>
+          <td><button id="delete" ng-click="chefController.delete(chef)" type="button" class="btn btn-default">Delete {{chef._id}}</button></td>
         </tr>
         </tbody>
       </table>
-
+      <button type="button" id="add" ng-click="chefController.add();" class="button btn btn-default">Add Chef</button>
 
       <footer>
         <br>
