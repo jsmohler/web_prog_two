@@ -56,20 +56,20 @@
 
         <table class="table table-responsive table-striped table-bordered">
           <tr>
-            <th><a ng-click="recipeDetailsController.updateDescription(recipeDetailsController.recipes)">Description</a></th>
-            <td colspan="2">{{recipeDetailsController.recipes.description}}</td>
+            <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><a ng-click="recipeDetailsController.updateDescription(recipeDetailsController.recipes)">Description</a></th>
+            <td class="col-xs-9 col-sm-9 col-md-9 col-lg-9">{{recipeDetailsController.recipes.description}}</td>
           </tr>
           <tr>
-            <th><a ng-click="recipeDetailsController.updatePrep(recipeDetailsController.recipes)">Prep Time<a/></th>
-            <td colspan="2">{{recipeDetailsController.recipes.prepTime}}</td>
+            <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><a ng-click="recipeDetailsController.updatePrep(recipeDetailsController.recipes)">Prep Time<a/></th>
+            <td class="col-xs-9 col-sm-9 col-md-9 col-lg-9">{{recipeDetailsController.recipes.prepTime}}</td>
           </tr>
           <tr>
-            <th><a ng-click="recipeDetailsController.updateCook(recipeDetailsController.recipes)">Cook Time</a></th>
-            <td colspan="2">{{recipeDetailsController.recipes.cookTime}}</td>
+            <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><a ng-click="recipeDetailsController.updateCook(recipeDetailsController.recipes)">Cook Time</a></th>
+            <td class="col-xs-9 col-sm-9 col-md-9 col-lg-9">{{recipeDetailsController.recipes.cookTime}}</td>
           </tr>
           <tr>
-            <th><a ng-click="recipeDetailsController.updateIngredients(recipeDetailsController.recipes)">Ingredients</a></th>
-            <td rowspan="2">
+            <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><a ng-click="recipeDetailsController.updateIngredients(recipeDetailsController.recipes)">Ingredients</a></th>
+            <td class="col-xs-9 col-sm-9 col-md-9 col-lg-9" rowspan="2">
               <table class="table table-responsive table-striped table-bordered">
                 <tr>
                   <th>Name</th>
@@ -83,7 +83,7 @@
             </td>
           </tr>
           <tr>
-            <td><button ng-click="recipeDetailsController.addIngredient(recipeDetailsController.recipes)" type="button" class="btn btn-default">Add Ingredient</button></td>
+            <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><button ng-click="recipeDetailsController.addIngredient(recipeDetailsController.recipes)" type="button" class="btn btn-default">Add Ingredient</button></td>
           </tr>
         </table>
 

@@ -32,22 +32,22 @@
       <table class="table table-responsive table-striped table-bordered">
         <thead>
         <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Edit Chef</th>
-          <th>Delete Chef</th>
+          <th class="col-xs-6 col-sm--3 col-md-2 col-lg-2">First Name</th>
+          <th class="col-xs-6 col-sm--3 col-md-2 col-lg-2">Last Name</th>
+          <th class="hidden-xs hidden-sm col-md-2 col-lg-2">Username</th>
+          <th class="hidden-xs hidden-sm col-md-2 col-lg-2">Email</th>
+          <th class="hidden-xs col-sm--3 col-md-2 col-lg-2">Edit Chef</th>
+          <th class="hidden-xs col-sm--3 col-md-2 col-lg-2">Delete Chef</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="chef in chefController.users">
-          <td>{{chef.name.firstName}}</td>
-          <td> {{chef.name.lastName}}</td>
-          <td>{{chef.username}}</td>
-          <td>{{chef.email}}</td>
-          <td><button id="edit" ng-click="chefController.edit(chef)" type="button" class="btn btn-default">Edit {{chef._id}}</button></td>
-          <td><button id="delete" ng-click="chefController.delete(chef)" type="button" class="btn btn-default">Delete {{chef._id}}</button></td>
+          <td class="col-xs-6 col-sm--3 col-md-2 col-lg-2">{{chef.name.firstName}}</td>
+          <td class="col-xs-6 col-sm--3 col-md-2 col-lg-2"> {{chef.name.lastName}}</td>
+          <td class="hidden-xs hidden-sm col-md-2 col-lg-2">{{chef.username}}</td>
+          <td class="hidden-xs hidden-sm col-md-2 col-lg-2">{{chef.email}}</td>
+          <td class="hidden-xs col-sm--3 col-md-2 col-lg-2"><button id="edit" ng-click="chefController.edit(chef)" type="button" class="btn btn-default">Edit {{chef._id}}</button></td>
+          <td class="hidden-xs col-sm--3 col-md-2 col-lg-2"><button id="delete" ng-click="chefController.delete(chef)" type="button" class="btn btn-default">Delete {{chef._id}}</button></td>
         </tr>
         </tbody>
       </table>
