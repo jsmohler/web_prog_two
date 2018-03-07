@@ -26,10 +26,10 @@ export function UserService($resource) {
     },
 
     destroyUser(user) {
-      let createResource = $resource('api/users/:id', null, {
-        create: {method : 'DELETE'}
+      let destroyResource = $resource('api/users/:id', null, {
+        destroy: {method : 'DELETE'}
       });
-      return createResource.remove({id: user._id}, user).$promise;
+      return destroyResource.remove({id: user._id}, user).$promise;
     },
   };
   return User;

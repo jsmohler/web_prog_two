@@ -26,6 +26,8 @@ export class UpdateRecipeController {
         amount: amount
       }
       this.recipe.ingredients.push(ingredient);
+      var submit = document.getElementById('submit');
+      submit.parentNode.removeChild(submit);
     } else if (this.command === "cook") {
       this.recipe.cookTime = parseInt(document.getElementById('cook').value);
     } else if (this.command === "description") {
@@ -38,6 +40,8 @@ export class UpdateRecipeController {
       this.recipe.prepTime = parseInt(document.getElementById('prep').value);
     } else if (this.command === "addDir") {
       this.recipe.directions.push(document.getElementsByName('direction')[0].value);
+      var submit = document.getElementById('submit');
+      submit.parentNode.removeChild(submit);
     } else if (this.command === "editDir") {
       var directions = document.getElementsByName('direction');
       var newDirections = [];

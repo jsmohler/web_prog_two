@@ -40,17 +40,17 @@ export function RecipeService($resource) {
     },
 
     destroyRecipe(recipe) {
-      let createResource = $resource('api/recipes/:id', null, {
-        create: {method : 'DELETE'}
+      let destroyResource = $resource('api/recipes/:id', null, {
+        destroy: {method : 'DELETE'}
       });
-      return createResource.remove({id: recipe._id}, recipe).$promise;
+      return destroyResource.remove({id: recipe._id}, recipe).$promise;
     },
 
     destroyReview(recipe, review) {
-      let createResource = $resource('api/recipes/:recipeId/reviews/:id', null, {
-        create: {method : 'DELETE'}
+      let destroyResource = $resource('api/recipes/:recipeId/reviews/:id', null, {
+        destroy: {method : 'DELETE'}
       });
-      return createResource.remove({recipeId: recipe._id, id: review._id}, review).$promise;
+      return destroyResource.remove({recipeId: recipe._id, id: review._id}, review).$promise;
     }
   };
   return Recipe;
