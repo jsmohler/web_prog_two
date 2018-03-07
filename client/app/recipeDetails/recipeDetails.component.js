@@ -24,8 +24,7 @@ export class RecipeDetailsController {
   setData() {
     this.active = 0;
     this.maxRating = 5;
-    this.rate = 8;
-    this.isReadOnly = false;
+    this.rate = 5;
     this.ratingStates = [
       {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
       {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
@@ -115,9 +114,20 @@ export class RecipeDetailsController {
     });
   }
 
-  updateReview(review, recipe) {
+  updateReviewDescription(review, recipe) {
     this.$uibModal.open({
       template: require('../../components/updateReviewModal/updateReviewModal.html'),
+      controller: 'updateReviewController as updateReviewController',
+      resolve: {
+        recipe: () => recipe,
+        review: () => review
+      }
+    });
+  }
+
+  updateReviewRating(review, recipe) {
+    this.$uibModal.open({
+      template: require('../../components/updateReviewModal/updateReviewRatingModal.html'),
       controller: 'updateReviewController as updateReviewController',
       resolve: {
         recipe: () => recipe,

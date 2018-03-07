@@ -13,8 +13,14 @@ export class UpdateReviewController {
     this.$uibModalInstance.dismiss('cancel');
   }
 
-  submitForm() {
-    this.review.description = document.getElementById('description').value;
+  submitForm(command) {
+    if (command === "description") {
+      this.review.description = document.getElementById('description').value;
+    } else if (command === "rating") {
+      this.review.rating = document.getElementById('rating').value;
+    } else {
+      console.error("Could not process " + command);
+    }
     this.Recipe.updateReview(this.review, this.recipe)
       .then(result => {
         this.formInfo = 'Review ' + result._id + ' successfully updated!';
