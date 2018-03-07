@@ -2,13 +2,11 @@ import angular from 'angular';
 
 export class UpdateReviewController {
   /*@ngInject*/
-  constructor($uibModalInstance, Review, review, Recipe, recipe) {
-    console.log("controller");
-    this.Review = Review;
+  constructor($uibModalInstance, Recipe, recipe, review) {
     this.Recipe = Recipe;
     this.$uibModalInstance = $uibModalInstance;
-    this.review = review;
     this.recipe = recipe;
+    this.review = review;
   }
 
   cancel() {
@@ -16,14 +14,14 @@ export class UpdateReviewController {
   }
 
   submitForm() {
-    this.Review.updateReview(this.review, this.recipe)
+    this.review.description = document.getElementById('description').value;
+    this.Recipe.updateReview(this.review, this.recipe)
       .then(result => {
-        console.log("uPM controller");
-        this.formInfo = 'Review successfully updated!';
+        this.formInfo = 'Review ' + result._id + ' successfully updated!';
       })
       .catch(err => {
         console.error(err);
-        this.formError = err;
+        this.formError = err.data;
       });
   }
 }

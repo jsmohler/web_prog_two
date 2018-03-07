@@ -55,16 +55,16 @@
 
         <table class="table table-responsive table-striped table-bordered">
           <tr>
-            <th>Description</th>
-            <td colspan="2"><a ng-click="recipeDetailsController.updateDescription(recipeDetailsController.recipes)">{{recipeDetailsController.recipes.description}}</a></td>
+            <th><a ng-click="recipeDetailsController.updateDescription(recipeDetailsController.recipes)">Description</a></th>
+            <td colspan="2">{{recipeDetailsController.recipes.description}}</td>
           </tr>
           <tr>
-            <th>Prep Time</th>
-            <td colspan="2"><a ng-click="recipeDetailsController.updatePrep(recipeDetailsController.recipes)">{{recipeDetailsController.recipes.prepTime}}</a></td>
+            <th><a ng-click="recipeDetailsController.updatePrep(recipeDetailsController.recipes)">Prep Time<a/></th>
+            <td colspan="2">{{recipeDetailsController.recipes.prepTime}}</td>
           </tr>
           <tr>
-            <th>Cook Time</th>
-            <td colspan="2"><a ng-click="recipeDetailsController.updateCook(recipeDetailsController.recipes)">{{recipeDetailsController.recipes.cookTime}}</a></td>
+            <th><a ng-click="recipeDetailsController.updateCook(recipeDetailsController.recipes)">Cook Time</a></th>
+            <td colspan="2">{{recipeDetailsController.recipes.cookTime}}</td>
           </tr>
           <tr>
             <th><a ng-click="recipeDetailsController.updateIngredients(recipeDetailsController.recipes)">Ingredients</a></th>
@@ -86,7 +86,7 @@
           </tr>
         </table>
 
-        <h3 align="center"><a ng-click="recipeDetailsController.updateDirections(recipeDetailsController.recipes)">Directions:</a></h3>
+        <h3 align="center"><a ng-click="recipeDetailsController.updateDirections(recipeDetailsController.recipes)">Directions</a></h3>
         <ul ng-repeat="direction in recipeDetailsController.recipes.directions">
           <li><a ng-click="recipeDetailsController.deleteDirection(direction)">{{direction}}</a></li>
         </ul>
@@ -98,31 +98,33 @@
           <div class="review">
             <table class="reviewData">
               <tr>
-                <th class="col-xs-6 col-sm-6 col-md-3 col-lg-3">Description</th>
-                <th class="col-xs-6 col-sm-6 col-md-3 col-lg-3">Rating</th>
-                <th class="hidden-xs hidden-sm col-md-3 col-lg-3">Created On:</th>
-                <th class="hidden-xs hidden-sm col-md-3 col-lg-3">Created By:</th>
+                <th class="col-xs-4 col-sm-4 col-md-3 col-lg-3">Description</th>
+                <th class="col-xs-4 col-sm-4 col-md-3 col-lg-3">Rating</th>
+                <th class="hidden-xs hidden-sm col-md-2 col-lg-2">Created On:</th>
+                <th class="hidden-xs hidden-sm col-md-2 col-lg-2">Created By:</th>
+                <th class="col-xs-4 col-sm-4 col-md-2 col-lg-2">Delete Review</th>
               </tr>
               <tr>
-                <td class="col-xs-6 col-sm-6 col-md-3 col-lg-3"><a ng-click="recipeDetailsController.updateReview(review, recipeDetailsController.recipes)">{{review.description}}</a></td>
-                <td class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                <td class="col-xs-4 col-sm-4 col-md-3 col-lg-3"><a ng-click="recipeDetailsController.updateReview(review, recipeDetailsController.recipes)">{{review.description}}</a></td>
+                <td class="col-xs-4 col-sm-4 col-md-3 col-lg-3">
                   <span uib-rating ng-model="review.rating" max="recipeDetailsController.maxRating" on-hover="recipeDetailsController.hoveringOver(value)" on-leave="recipeDetailsController.overStar = null" titles="['one','two','three']"></span>
                 </td>
-                <td class="hidden-xs hidden-sm col-md-3 col-lg-3">{{review.createDate}}</td>
-                <td class="hidden-xs hidden-sm col-md-3 col-lg-3">{{review.user}}</td>
+                <td class="hidden-xs hidden-sm col-md-2 col-lg-2">{{review.createDate}}</td>
+                <td class="hidden-xs hidden-sm col-md-2 col-lg-2">{{review.user}}</td>
+                <td class="col-xs-4 col-sm-4 col-md-2 col-lg-2"><button ng-click="recipeDetailsController.deleteReview(recipeDetailsController.recipes, review)" type="button" class="btn btn-default">Delete {{review._id}}</button></td>
               </tr>
             </table>
           </div>
           <br>
         </div>
+        <button ng-click="recipeDetailsController.addReview(recipeDetailsController.recipes)" type="button" class="btn btn-default">Add Review</button>
 
-        <footer>
+
           <br>
           <br>
           <br>
           <br>
           <br>
           <br>
-        </footer>
       </div>
     </div>

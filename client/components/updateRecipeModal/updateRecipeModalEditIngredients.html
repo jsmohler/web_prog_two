@@ -13,9 +13,10 @@
       <div class="form-group">
         <div>
           <h5 class="col-xs-2 col-sm-2 control-label">Ingredients</h5>
-          <h6 display="inline-block">Name</h6>
-          <h6 display="inline-block">Amount</h6>
         </div>
+        <br>
+        <br>
+        <br>
         <div ng-repeat="ingredient in updateRecipeController.recipe.ingredients">
            <input align="right" name="ingredientName" required="required" class="form-control" ng-model="ingredient.name"/>
            <input align="left" name="ingredientAmount" required="required" class="form-control" ng-model="ingredient.amount"/>

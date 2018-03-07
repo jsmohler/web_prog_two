@@ -24,12 +24,13 @@ import updateUserModal from '../components/updateUserModal/updateUserModal.contr
 import updateReviewModal from '../components/updateReviewModal/updateReviewModal.controller';
 import updateRecipeModal from '../components/updateRecipeModal/updateRecipeModal.controller';
 import createUserModal from '../components/createUserModal/createUserModal.controller';
+import createReviewModal from '../components/createReviewModal/createReviewModal.controller';
 
 import './app.scss';
 
 angular.module('comp3705App', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap,
 main, constants, util, userDetail, recipeDetail, submitRecipe, user, updateUserModal,
-  updateRecipeModal, createUserModal, updateReviewModal, recipe])
+updateRecipeModal, createUserModal, createReviewModal, updateReviewModal, recipe])
   .config(routeConfig);
 
 angular.element(document)

@@ -8,9 +8,9 @@
       <div role="alert" ng-show="updateReviewController.formError" class="alert alert-danger">{{ updateReviewController.formError }}</div>
       <div role="alert" ng-show="updateReviewController.formInfo" class="alert alert-info">{{ updateReviewController.formInfo }}</div>
       <div class="form-group">
-        <label for="cook" class="col-xs-2 col-sm-2 control-label">Cook Time</label>
+        <label for="description" class="col-xs-2 col-sm-2 control-label">Description</label>
         <div class="col-xs-10 col-sm-10">
-          <input id="cook" name="cook" required="required" ng-model="updateReviewController.review.description" class="form-control"/>
+          <input id="description" name="description" required="required" ng-model="updateReviewController.recipe.reviews.description" class="form-control"/>
         </div>
       </div>
     </div>

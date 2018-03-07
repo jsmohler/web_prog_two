@@ -105,18 +105,35 @@ export class RecipeDetailsController {
     });
   }
 
-  updateReview(review, recipe) {
-    console.log(review);
-    console.log(recipe);
+  addReview(recipe) {
     this.$uibModal.open({
-      template: require('../../components/updateReviewModal/updateReviewModalDescription.html'),
-      controller: 'updateReviewController',
-      controllerAs: 'updateReviewController',
+      template: require('../../components/createReviewModal/createReviewModal.html'),
+      controller: 'createReviewController as createReviewController',
       resolve: {
-        review: () => review,
         recipe: () => recipe
       }
     });
+  }
+
+  updateReview(review, recipe) {
+    this.$uibModal.open({
+      template: require('../../components/updateReviewModal/updateReviewModal.html'),
+      controller: 'updateReviewController as updateReviewController',
+      resolve: {
+        recipe: () => recipe,
+        review: () => review
+      }
+    });
+  }
+
+  deleteReview(recipe, review) {
+    this.Recipe.destroyReview(recipe, review)
+      .then(result => {
+        location.reload();
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 
   addIngredient(recipe) {
