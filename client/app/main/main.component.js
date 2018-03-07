@@ -1,6 +1,8 @@
 import angular from 'angular';
 const ngRoute = require('angular-route');
 import routing from './main.routes';
+const uiBootstrap = require('angular-ui-bootstrap');
+import user from '../../components/userService/user.module';
 
 export class MainController {
   /*@ngInject*/
@@ -9,7 +11,7 @@ export class MainController {
     this.User = User;
     this.$uibModal = $uibModal;
     this.setData();
-    this.increment();
+    //this.increment();
     this.getUserData();
   }
 
@@ -84,7 +86,7 @@ export function SquareFilter() {
   return squareFunction;
 }
 
-export default angular.module('comp3705App.main', [ngRoute])
+export default angular.module('comp3705App.main', [ngRoute, uiBootstrap, user])
   .config(routing)
   .component('main', {
     template: require('./main.html'),
