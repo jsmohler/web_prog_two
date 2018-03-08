@@ -43,7 +43,7 @@ export class RecipeController {
       })
       .catch(err => {
         console.error(err);
-        this.formError = err.toString();
+        window.alert(err.data);
       });
   }
 

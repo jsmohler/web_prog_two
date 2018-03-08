@@ -1,0 +1,109 @@
+.topnav {
+  overflow: hidden;
+  background-color: rgb(206, 118, 24);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+  color: black;
+}
+
+.review {
+  background-color: rgba(231,187,140, 0.25);
+  border-radius: 5px;
+  padding:10px;
+}
+
+.reviewData {
+  height: 100%;
+  width: 100%;
+}
+
+
+#myForm {
+  width: 75%;
+  box-shadow: 4px 4px 3px #666;
+  border-radius: 12px;
+  border: 1px solid black;
+  padding: 0em 2em 2em 2em;
+  background-color: rgba(231,187,140, 0.25);
+  margin-bottom: 2em;
+  color: rgb(206, 118, 24);
+}
+
+
+.contact {
+  width: 85%;
+  align:center;
+  display: block;
+  text-align: left;
+}
+
+fieldset {
+  color: rgb(206, 118, 24);
+  margin-top: 0.25em;
+  border-radius: 10px;
+  padding: 1em;
+}
+
+.button {
+  display: inline;
+  float: right;
+  border-radius: 5px;
+  background-color: white;
+  margin-top: -1em;
+}
+
+#send {
+  background-color: rgb(206, 118, 24);
+  color: white;
+}
+
+.row {
+  color: rgb(206, 118, 24);
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th {
+  background-color: rgba(231,187,140, 0.25);
+}
+
+table {
+  color: rgb(206, 118, 24);
+}
+
+a {
+  color: rgb(206, 118, 24);
+}
+
+h1 {
+  color: rgb(206, 118, 24);
+  font-size: 75px;
+  font-weight: normal;
+  margin: 0 0 50px;
+  text-align: center;
+  text-shadow: 1px 1px 2px #082b34; }
+
+.btn-default{
+  border-color: rgb(206, 118, 24)!important;
+  color: rgb(206, 118, 24)!important;
+}
