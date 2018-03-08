@@ -44,10 +44,10 @@ a:hover {
   box-shadow: 4px 4px 3px #666;
   border-radius: 12px;
   border: 1px solid black;
-  padding: 0em 2em 2em 2em;
+  padding: 2em 2em 8em 2em;
   background-color: rgba(231,187,140, 0.25);
-  margin-bottom: 2em;
   color: rgb(206, 118, 24);
+  margin-bottom: 4em;
 }
 
 
@@ -65,12 +65,21 @@ fieldset {
   padding: 1em;
 }
 
+.dir {
+  margin-bottom: -1em;
+}
+
+.buttons {
+  width: 65%;
+  align: left;
+  margin-left: 10%;
+}
+
 .button {
   display: inline;
   float: right;
   border-radius: 5px;
   background-color: white;
-  margin-top: -1em;
 }
 
 #send {

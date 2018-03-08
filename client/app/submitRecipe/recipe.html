@@ -34,17 +34,17 @@
             </tr>
           </table>
           <br>
-          <label class="contact">Directions:
+          <label class="contact dir">Directions:
             <div id="dir"><input name="directions" required="required" ng-model="recipeController.recipes.directions" class="form-control"/></div>
           </label>
           <br>
         </fieldset>
 
         <div class="buttons" style="margin-right:10%">
-          <button type="button" id="send" ng-click="recipeController.submitForm();" class="button">Send</button>
-          <button type="reset" name="clear" class="button">Reset Form</button>
-          <button type="button" id="addIngr" ng-click="recipeController.addIngr();" class="button">Add Ingredient</button>
-          <button type="button" id="addDire" ng-click="recipeController.addDire();" class="button">Add Direction</button>
+          <button type="button" id="addIngr" ng-click="recipeController.addIngr();" class="button col-xs-12 col-sm-12 col-md-6 col-lg-6">Add Ingredient</button>
+          <button type="button" id="addDire" ng-click="recipeController.addDire();" class="button col-xs-12 col-sm-12 col-md-6 col-lg-6">Add Direction</button>
+          <button type="button" id="send" ng-click="recipeController.submitForm();" class="button col-xs-12 col-sm-12 col-md-6 col-lg-6">Send</button>
+          <button type="reset" name="clear" class="button col-xs-12 col-sm-12 col-md-6 col-lg-6">Reset Form</button>
         </div>
       </form>
     </div>
